@@ -14,8 +14,28 @@ class OneRepMaxService
         return $weights;
     }
 
+    public function getRatio($lifter, $oneRepMax) {
+        return $oneRepMax / $lifter->weight;
+    }
+
+    public function getExample($minRatio, $maxRatio) {
+        $weight = 80;
+        $total1 = $weight * $minRatio;
+        $total2 = $weight * $maxRatio;
+
+        return [
+            $weight => [$total1, $total2],
+        ];
+    }
+
     public function registerLifterRecord($lifter, $compound, $total, $reps)
     {
+        $lifterRecord = LifterRecord::find($lifter->id, ['lifter_id']);
+
+        if ($lifterRecord) {
+            return;
+        }
+
         $oneRepMax = $this->getOneRepMax($total, $reps);
 
         LifterRecord::create([

@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Lifter;
 use App\Models\Compound;
-use App\Models\LifterRecord;
 use Illuminate\Http\Request;
 use App\Services\OneRepMaxService;
-use App\Models\StrengthStandardsLevel;
-use Ramsey\Uuid\Type\Integer;
+use App\Services\StrengthComparisonService;
 
 class OneRepMaxController extends Controller
 {
     protected $oneRepMaxService;
+    protected $strengthComparisonService;
 
-    public function __construct(OneRepMaxService $oneRepMaxService)
+    public function __construct(OneRepMaxService $oneRepMaxService, StrengthComparisonService $strengthComparisonService)
     {
         $this->oneRepMaxService = $oneRepMaxService;
+        $this->strengthComparisonService = $strengthComparisonService;
     }
 
     public function step1()
@@ -93,12 +93,25 @@ class OneRepMaxController extends Controller
 
         $results = $this->oneRepMaxService->getWeightChart($total, $reps, $repsInReserve);
         $percentOfRelativeIntensity = $this->oneRepMaxService->getPercentOfRelativeIntensity($reps, $repsInReserve);
+
         try {
             $this->oneRepMaxService->registerLifterRecord($lifter, $compound, $total, $reps + $repsInReserve);
-            
+            $trainingLevel = $this->strengthComparisonService->getTrainingLevel($lifter, $compound);
+            $standards = $this->strengthComparisonService->getStrengthStandardsByTime($lifter, $compound);
+            $example = $this->oneRepMaxService->getExample($standards['minRatio'], $standards['maxRatio']);
+            $oneRepMax = $this->oneRepMaxService->getOneRepMax($total, $reps + $repsInReserve);
+            $weightRatio = $this->oneRepMaxService->getRatio($lifter, $oneRepMax);
+
             return view('onerepmax.finalStep', [
                 'results' => $results,
                 'percentOfRelativeIntensity' => $percentOfRelativeIntensity,
+                'trainingLevel' => $trainingLevel,
+                'standards' => $standards,
+                'lifter' => $lifter,
+                'weightRatio' => $weightRatio,
+                'oneRepMax' => $oneRepMax,
+                'compound' => $compound,
+                'example' => $example,
             ]);
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage(), 1);

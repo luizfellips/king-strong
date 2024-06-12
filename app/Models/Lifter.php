@@ -22,7 +22,7 @@ class Lifter extends Model
         return $this->hasOne(LifterRecord::class);
     }
 
-    public function getOneRepMaxForCompound($compoundId)
+    public function getLifterRecordForCompound($compoundId)
     {
         return $this->lifterRecord()->where('compound_id', $compoundId)->first();
     }

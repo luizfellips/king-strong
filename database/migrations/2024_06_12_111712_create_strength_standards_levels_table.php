@@ -100,7 +100,7 @@ return new class extends Migration
             1 => [
                 'beginner' => ['min' => 1.5, 'max' => 1.5],
                 'intermediate' => ['min' => 1.5, 'max' => 2.25],
-                'advanced' => ['min' => 2, 25, 'max' => 3],
+                'advanced' => ['min' => 2.25, 'max' => 3],
                 'elite' => ['min' => 3, 'max' => 3.5],
 
             ],
