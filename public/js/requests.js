@@ -1,10 +1,6 @@
 $(document).ready(function () {
     $('.fade-in').addClass('show');
 
-    $('.openModal').click(function () {
-        $('#myModal').fadeIn();
-    });
-
     $('#closeModal').click(function () {
         $('#myModal').fadeOut();
     });
@@ -50,7 +46,7 @@ function processData(data) {
     // Iterate over muscles array and create span elements
     data.muscles.forEach(function (muscle, index) {
         var span = $('<span>', {
-            'class': 'bg-red-100 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900',
+            'class': 'bg-red-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900',
             'text': muscle
         });
 
@@ -65,4 +61,6 @@ function processData(data) {
 
     $('#image').attr('src', data.imagePath);
     $('#compound_id').val(data.id);
+
+    $('#myModal').fadeIn();
 }

@@ -1,7 +1,7 @@
 @props(['compounds'])
 <div class="flex flex-col justify-center align-center mb-5">
     @foreach ($compounds as $compound)
-        <button id="{{$compound->id}}" class="openModal bg-black my-2 text-white px-4 py-2 rounded">{{ $compound->name }}</button>
+        <button id="{{$compound->id}}" class="openModal bg-black my-2 hover:bg-red-700 transition-colors text-white px-4 py-2 rounded">{{ $compound->name }}</button>
     @endforeach
 </div>
 
@@ -15,6 +15,7 @@
             <p id="shortDescription" class="text-sm">O</p>
             <p class="text-sm mt-3 text-gray-600"></p>
             <div id="muscles">
+                <span class="bg-red-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900"></span>
             </div>
 
             <button id="closeModalButton"
