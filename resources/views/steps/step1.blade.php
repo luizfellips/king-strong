@@ -29,7 +29,7 @@
         <div class="lg:p-36 md:p-52 sm:20 p-8 fade-in">
             <x-logo />
             <h1 class="text-2xl font-medium flex justify-center mb-12">Calcule suas porcentagens de 1RM!</h1>
-            <form action="{{route('step2')}}" method="POST">
+            <form action="{{route('onerepmax.step2')}}" method="POST">
                 @csrf
                 <div class="mb-5">
                     <label for="name" class="block text-gray-600">Qual o seu nome?</label>

@@ -57,4 +57,16 @@
     </div>
 </body>
 <script src="{{ asset('js/requests.js') }}"></script>
+<script>
+    let baseUrl = '{{ asset('') }}';
+
+
+    $('.openModal').click(function() {
+        setTimeout(() => {
+            let url = $('#image').attr('src');
+            $('#image').attr('src', baseUrl + url);
+        }, 50);
+    })
+</script>
+
 </html>

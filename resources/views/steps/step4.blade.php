@@ -24,7 +24,7 @@
         <div class="lg:p-36 md:p-52 sm:20 p-8 fade-in">
             <x:logo />
             <h1 class="text-2xl font-medium flex justify-center mb-12">Insira seu recorde pessoal no {{$compound->name}}.</h1>
-            <form action="{{route('process')}}" method="POST">
+            <form action="{{route('onerepmax.process')}}" method="POST">
                 @csrf
                 <div class="mb-5">
                     <div class="mb-4">

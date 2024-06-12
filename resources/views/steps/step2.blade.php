@@ -24,7 +24,7 @@
         <div class="lg:p-36 md:p-52 sm:20 p-8 fade-in">
             <x:logo />
             <h1 class="text-2xl font-medium flex justify-center mb-12">Olá {{ $lifter->name }}!</h1>
-            <form action="{{route('step3')}}" method="POST">
+            <form action="{{route('onerepmax.step3')}}" method="POST">
                 @csrf
                 <input type="hidden" name="lifter_id" value="{{ $lifter->id }}">
 

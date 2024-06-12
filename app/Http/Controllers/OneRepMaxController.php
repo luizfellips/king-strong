@@ -6,7 +6,7 @@ use App\Models\Lifter;
 use App\Models\Compound;
 use Illuminate\Http\Request;
 
-class PowerMarombaController extends Controller
+class OneRepMaxController extends Controller
 {
     public function step1()
     {
@@ -18,7 +18,7 @@ class PowerMarombaController extends Controller
         $name = $request->input('name');
 
         if (!$name) {
-            return redirect()->route('step1')->with('error', 'Name is required');
+            return redirect()->route('onerepmax.step1')->with('error', 'Name is required');
         }
 
         try {
@@ -41,7 +41,7 @@ class PowerMarombaController extends Controller
         $compounds = Compound::with('muscles')->get();
 
         if (!$lifter) {
-            return redirect()->route('step1')->with('error', 'Lifter not found');
+            return redirect()->route('onerepmax.step1')->with('error', 'Lifter not found');
         }
 
         // Save the lifter to the database

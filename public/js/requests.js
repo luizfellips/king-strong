@@ -37,7 +37,7 @@ $(document).ready(function () {
 
 function processData(data) {
     $('#name').text(data.name);
-    $('#description').text(data.name);
+    $('#description').text(data.description);
     $('#shortDescription').text(data.shortDescription);
 
     // Clear previous content
@@ -58,7 +58,7 @@ function processData(data) {
             $('#muscles').append('<div class="row"></div>');
         }
     });
-
+    console.log(data.imagePath);
     $('#image').attr('src', data.imagePath);
     $('#compound_id').val(data.id);
 
