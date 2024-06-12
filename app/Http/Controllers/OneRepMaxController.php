@@ -77,7 +77,7 @@ class OneRepMaxController extends Controller
         $reps = $request->input('reps');
         $repsInReserve = $request->input('repsInReserve');
 
-        $results = $this->oneRepMaxService->calculateResults($total, $reps, $repsInReserve);
+        $results = $this->oneRepMaxService->getWeightChart($total, $reps, $repsInReserve);
         $percentOfRelativeIntensity = $this->oneRepMaxService->getPercentOfRelativeIntensity($reps, $repsInReserve);
 
         return view('onerepmax.finalStep', [
@@ -85,5 +85,4 @@ class OneRepMaxController extends Controller
             'percentOfRelativeIntensity' => $percentOfRelativeIntensity,
         ]);
     }
-
 }

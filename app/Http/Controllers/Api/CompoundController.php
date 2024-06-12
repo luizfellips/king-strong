@@ -10,13 +10,6 @@ use Illuminate\Http\Request;
 class CompoundController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Compound $compound)

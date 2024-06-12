@@ -3,10 +3,10 @@
 namespace App\Services;
 
 class OneRepMaxService {
-    public function calculateResults($total, $reps, $repsInReserve)
+    public function getWeightChart($total, $reps, $repsInReserve)
     {
         $possibleReps = $reps + $repsInReserve;
-        $oneRepMax = $this->calculateOneRepMax($total, $possibleReps);
+        $oneRepMax = $this->getOneRepMax($total, $possibleReps);
         $weights = $this->calculateWeights($oneRepMax);
         return $weights;
     }
@@ -42,7 +42,7 @@ class OneRepMaxService {
         return $weights;
     }
 
-    protected function calculateOneRepMax($total, $possibleReps)
+    protected function getOneRepMax($total, $possibleReps)
     {
         // Epley formula
         return $total * (1 + 0.0333 * $possibleReps);
