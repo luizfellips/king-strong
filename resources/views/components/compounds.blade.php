@@ -1,4 +1,4 @@
-@props(['compounds'])
+@props(['compounds', 'lifter'])
 <div class="flex flex-col justify-center align-center mb-5">
     @foreach ($compounds as $compound)
         <button id="{{ $compound->id }}"
@@ -25,6 +25,7 @@
             <form action="{{ route('onerepmax.step4') }}" method="post">
                 @csrf
                 <input id="compound_id" name="compound_id" type="hidden" value="">
+                <input id="lifter_id" name="lifter_id" type="hidden" value="{{$lifter->id}}">
                 <x-button :alt='true'>Escolher</x-button>
             </form>
         </div>

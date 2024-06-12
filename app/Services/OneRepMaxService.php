@@ -2,13 +2,27 @@
 
 namespace App\Services;
 
-class OneRepMaxService {
+use App\Models\LifterRecord;
+
+class OneRepMaxService
+{
     public function getWeightChart($total, $reps, $repsInReserve)
     {
         $possibleReps = $reps + $repsInReserve;
         $oneRepMax = $this->getOneRepMax($total, $possibleReps);
         $weights = $this->calculateWeights($oneRepMax);
         return $weights;
+    }
+
+    public function registerLifterRecord($lifter, $compound, $total, $reps)
+    {
+        $oneRepMax = $this->getOneRepMax($total, $reps);
+
+        LifterRecord::create([
+            'lifter_id' => $lifter->id,
+            'compound_id' => $compound->id,
+            'one_rep_max' => $oneRepMax,
+        ]);
     }
 
     protected function calculateWeights($oneRepMax)
@@ -42,7 +56,7 @@ class OneRepMaxService {
         return $weights;
     }
 
-    protected function getOneRepMax($total, $possibleReps)
+    public function getOneRepMax($total, $possibleReps)
     {
         // Epley formula
         return $total * (1 + 0.0333 * $possibleReps);

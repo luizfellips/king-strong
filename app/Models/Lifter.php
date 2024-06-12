@@ -13,6 +13,17 @@ class Lifter extends Model
     protected $fillable = [
         'name',
         'height',
-        'weight'
+        'weight',
+        'years_of_lifting'
     ];
+
+    public function lifterRecord()
+    {
+        return $this->hasOne(LifterRecord::class);
+    }
+
+    public function getOneRepMaxForCompound($compoundId)
+    {
+        return $this->lifterRecord()->where('compound_id', $compoundId)->first();
+    }
 }
