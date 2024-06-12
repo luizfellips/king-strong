@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-    <title>Marombapp</title>
+    <title>PowerMaromba</title>
     <style>
         .fade-in {
             opacity: 0;
@@ -46,21 +46,22 @@
 </head>
 
 <body>
-    <div class="bg-gray-100 flex justify-center items-center h-screen">
+    <div
+        class="bg-gray-100 flex justify-center items-center {{ Request::route() && Request::route()->getName() !== 'onerepmax.process' ? 'h-screen' : '' }}">
         <div class="lg:p-36 md:p-52 sm:20 p-8 fade-in">
             <x-logo />
-            <h1 class="text-2xl font-medium text-center flex justify-center mb-12">Movimentos Compostos (Compound Lifts)
-            </h1>
-            <x-compounds :compounds="$compounds" />
-
+            {{ $slot }}
         </div>
     </div>
+
 </body>
 <script src="{{ asset('js/requests.js') }}"></script>
 <script>
+    $(document).ready(function() {
+        $('.fade-in').addClass('show');
+    });
+
     let baseUrl = '{{ asset('') }}';
-
-
     $('.openModal').click(function() {
         setTimeout(() => {
             let url = $('#image').attr('src');
@@ -68,5 +69,6 @@
         }, 50);
     })
 </script>
+
 
 </html>

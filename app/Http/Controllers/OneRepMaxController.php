@@ -10,7 +10,7 @@ class OneRepMaxController extends Controller
 {
     public function step1()
     {
-        return view('steps.step1');
+        return view('onerepmax.step1');
     }
 
     public function step2(Request $request)
@@ -25,7 +25,7 @@ class OneRepMaxController extends Controller
             $lifter = Lifter::create(['name' => $name]);
 
 
-            return view('steps.step2', ['lifter' => $lifter]);
+            return view('onerepmax.step2', ['lifter' => $lifter]);
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage(), $th->getCode());
         }
@@ -51,7 +51,7 @@ class OneRepMaxController extends Controller
                 'weight' => $weight,
             ]);
 
-            return view('steps.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
+            return view('onerepmax.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage(), $th->getCode());
         }
@@ -60,7 +60,7 @@ class OneRepMaxController extends Controller
     public function step4(Request $request)
     {
         $compound = Compound::find($request->input('compound_id'));
-        return view('steps.step4', ['compound' => $compound]);
+        return view('onerepmax.step4', ['compound' => $compound]);
     }
 
     public function process(Request $request)
@@ -69,7 +69,7 @@ class OneRepMaxController extends Controller
         $reps = $request->input('reps');
         $repsInReserve = $request->input('repsInReserve');
 
-        return view('steps.finalStep', [
+        return view('onerepmax.finalStep', [
             'results' => $this->calculateResults($total, $reps, $repsInReserve),
             'percentOfRelativeIntensity' => $this->getPercentOfRelativeIntensity($reps, $repsInReserve),
         ]);

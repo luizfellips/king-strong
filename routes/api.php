@@ -6,5 +6,6 @@ use App\Http\Controllers\Api\CompoundController;
 Route::group([
     'namespace' => 'App\Http\Controllers\Api',
 ], function () {
-    Route::apiResource('compounds', CompoundController::class);
+    Route::get('compounds', [CompoundController::class, 'index'])->name('compounds.index');
+    Route::get('compounds/{compound}', [CompoundController::class, 'show'])->name('compounds.show');
 });
