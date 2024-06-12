@@ -61,6 +61,5 @@ function processData(data) {
     console.log(data.imagePath);
     $('#image').attr('src', data.imagePath);
     $('#compound_id').val(data.id);
-
     $('#myModal').fadeIn();
 }

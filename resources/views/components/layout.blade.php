@@ -60,15 +60,6 @@
     $(document).ready(function() {
         $('.fade-in').addClass('show');
     });
-
-    let baseUrl = '{{ asset('') }}';
-    $('.openModal').click(function() {
-        setTimeout(() => {
-            let url = $('#image').attr('src');
-            $('#image').attr('src', baseUrl + url);
-        }, 50);
-    })
 </script>
-
 
 </html>

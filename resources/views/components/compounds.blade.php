@@ -11,7 +11,7 @@
     <div class="modal-content centered">
         <span id="closeModal" class="close absolute top-2 right-2 cursor-pointer text-gray-500">&times;</span>
         <h3 id="name" class="text-lg font-semibold mb-2"></h3>
-        <img id="image" alt="">
+        <img id="image" src="" alt="">
         <p id="description" class="text-sm mt-3"></p>
         <div class="">
             <p id="shortDescription" class="text-sm text-gray-600">O</p>
