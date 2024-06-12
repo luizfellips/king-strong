@@ -58,8 +58,7 @@ function processData(data) {
             $('#muscles').append('<div class="row"></div>');
         }
     });
-    console.log(data.imagePath);
-    $('#image').attr('src', data.imagePath);
+    $('#image').attr('img_url', data.imagePath);
     $('#compound_id').val(data.id);
     $('#myModal').fadeIn();
 }
