@@ -32,10 +32,10 @@ return new class extends Migration
             // Associate muscles with compounds based on compound name
             switch ($compound->name) {
                 case 'Levantamento Terra (Deadlift)':
-                    $muscles = ['Quadríceps', 'Eretores espinhais', 'Deltoides (anterior, posterior)', 'Serrátil anterior'];
+                    $muscles = ['Isquiotibiais', 'Glúteos', 'Eretores espinhais', 'Trapézios', 'Abdominais', 'Antebraços'];
                     break;
                 case 'Supino Reto (Bench Press)':
-                    $muscles = ['Peitoral maior', 'Tríceps'];
+                    $muscles = ['Peitoral maior', 'Tríceps', 'Deltoides (anterior, posterior)'];
                     break;
                 case 'Agachamento Livre (Back Squat)':
                     $muscles = ['Quadríceps', 'Isquiotibiais', 'Glúteos', 'Eretores espinhais'];

@@ -19,8 +19,6 @@
     </style>
 </head>
 <body>
-
-
     <div class="bg-gray-100 flex justify-center items-center">
         <div class="lg:p-36 md:p-52 sm:20 p-8 fade-in">
             <x-logo />
@@ -37,8 +35,8 @@
                     </thead>
                     <tbody class="text-blue-gray-900">
                         @foreach ($results as $key => $value )
-                        <tr class="border-b border-blue-gray-200">
-                            <td class="py-3 px-4">{{$value}}kg</td>
+                        <tr class="border-b border-blue-gray-200 {{$key == $percentOfRelativeIntensity ? 'bg-red-400 text-white' : ''}}">
+                            <td class="py-3 px-4">{{$value}} - {{$value + 2}}kg</td>
                             <td class="py-3 px-4">{{ $loop->last ? 15 : $loop->index + 1 }}</td>
                             <td class="py-3 px-4">{{$key}}%</td>
                         </tr>

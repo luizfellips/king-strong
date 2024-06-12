@@ -112,17 +112,11 @@ class PowerMarombaController extends Controller
 
     protected function calculateWeightsInRange($oneRepMax, $startPercent, $endPercent, $decrement, $weights)
     {
-        $percent = $startPercent;
+        $percentages = range($startPercent, $endPercent, -$decrement);
 
-        while ($percent >= $endPercent) {
+        foreach ($percentages as $percent) {
             $estimatedWeight = ($percent / 100) * $oneRepMax;
             $weights[number_format($percent, 1)] = round($estimatedWeight) - 2;
-
-            if ($percent == $endPercent) {
-                $decrement = $decrement / 2;
-            }
-
-            $percent -= $decrement;
         }
 
         return $weights;
