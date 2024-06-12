@@ -86,47 +86,42 @@ class PowerMarombaController extends Controller
     protected function calculateResults($total, $reps, $repsInReserve)
     {
         $possibleReps = $reps + $repsInReserve;
-
         $oneRepMax = $this->calculateOneRepMax($total, $possibleReps);
+        $weights = $this->calculateWeights($oneRepMax);
+        return $weights;
+    }
+
+    protected function calculateWeights($oneRepMax)
+    {
         $weights = [];
 
-        // First range: 100% to 75%
-        $percent = 100;
-        $decrement = 5;
+        $ranges = [
+            ["start" => 100, "end" => 95, "decrement" => 5],
+            ["start" => 95, "end" => 75, "decrement" => 2.5],
+            ["start" => 75, "end" => 70, "decrement" => 5],
+            ["start" => 70, "end" => 65, "decrement" => 2.5],
 
-        while ($percent >= 75) {
-            $estimatedWeight = ($percent / 100) * $oneRepMax;
-            $weights[number_format($percent, 1)] = round($estimatedWeight) - 2;
+        ];
 
-            if ($percent == 95) {
-                $decrement = 2.5;
-            }
-
-            $percent -= $decrement;
+        foreach ($ranges as $range) {
+            $weights = $this->calculateWeightsInRange($oneRepMax, $range["start"], $range["end"], $range["decrement"], $weights);
         }
 
-        // Second range: 75% to 70%
-        $percent = 75;
-        $decrement = 5;
+        return $weights;
+    }
 
-        while ($percent >= 70) {
+    protected function calculateWeightsInRange($oneRepMax, $startPercent, $endPercent, $decrement, $weights)
+    {
+        $percent = $startPercent;
+
+        while ($percent >= $endPercent) {
             $estimatedWeight = ($percent / 100) * $oneRepMax;
             $weights[number_format($percent, 1)] = round($estimatedWeight) - 2;
 
-            if ($percent == 70) {
-                $decrement = 2.5;
+            if ($percent == $endPercent) {
+                $decrement = $decrement / 2;
             }
 
-            $percent -= $decrement;
-        }
-
-        // Third range: 70% to 65%
-        $percent = 70;
-        $decrement = 2.5;
-
-        while ($percent >= 65) {
-            $estimatedWeight = ($percent / 100) * $oneRepMax;
-            $weights[number_format($percent, 1)] = round($estimatedWeight) - 2;
             $percent -= $decrement;
         }
 
