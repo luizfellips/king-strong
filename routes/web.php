@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\OneRepMaxController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OneRepMaxController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('onerepmax')->name('onerepmax.')->group(function() {
     Route::get('/', [OneRepMaxController::class, 'step1'])->name('step1');

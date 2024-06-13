@@ -12,9 +12,9 @@
         @foreach ($results as $key => $value)
             <tr
                 class="border-b border-blue-gray-200 {{ $key == $percentOfRelativeIntensity ? 'bg-red-500 text-white' : '' }}">
-                <td class="py-3 px-4">{{ $value }} - {{ $value + 2 }}kg</td>
-                <td class="py-3 px-4">{{ $loop->last ? 15 : $loop->index + 1 }}</td>
-                <td class="py-3 px-4">{{ $key }}%</td>
+                <td class="py-3 px-4">{{ $value - 1 }}kg - {{ $value + 2 }}kg</td>
+                <td class="py-3 px-4">{{ $loop->last ? 15 : $loop->index + 1 }} - {{ $loop->last ? 15 : $loop->index + 2 }} </td>
+                <td class="py-3 px-4">{{ $key - 1.5 }}% - {{ $key }}%</td>
             </tr>
         @endforeach
     </tbody>

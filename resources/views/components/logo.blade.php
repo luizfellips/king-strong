@@ -1,5 +1,7 @@
+@props(['alt'])
+
 <div class="icon flex justify-center mb-5">
-    <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+    <svg fill="{{isset($alt) ? 'white' : 'black'}}" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px"
         viewBox="0 0 500.043 500.043" xml:space="preserve">
         <g>

@@ -4,6 +4,8 @@
         </div>
     @endif
     <x-layout>
+        <a href="{{route('home')}}">
+        </a>
         <h1 class="text-2xl font-medium flex justify-center mb-12">Calcule suas porcentagens de 1RM!</h1>
         <form action="{{ route('onerepmax.step2') }}" method="POST">
             @csrf
@@ -14,5 +16,6 @@
                     autocomplete="off">
             </div>
             <x-button> Próximo </x-button>
+            <x-link-button :route="route('home')"> Voltar </x-link-button>
         </form>
     </x-layout>
