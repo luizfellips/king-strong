@@ -14,7 +14,8 @@ class Lifter extends Model
         'name',
         'height',
         'weight',
-        'years_of_lifting'
+        'years_of_lifting',
+        'gender'
     ];
 
     public function lifterRecord()

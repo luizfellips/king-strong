@@ -19,7 +19,6 @@ return new class extends Migration
             $table->float('min_ratio');
             $table->float('max_ratio');
             $table->char('gender');
-            $table->timestamps();
 
             $table->foreign('compound_id')->references('id')->on('compounds')->onDelete('cascade');
         });
@@ -29,13 +28,28 @@ return new class extends Migration
 
     protected function insertDefaultRecords()
     {
-        $strength_standards = [];
-
-        $compound_ids = [1, 2, 3, 4];
+        $compound_ids = [1, 2, 3];
 
         $training_levels = ['novice', 'beginner', 'intermediate', 'advanced', 'elite'];
 
-        $ratioValues = $this->getRatioValues();
+        $maleRatioValues = $this->getMaleRatioValues();
+        $femaleRatioValues = $this->getFemaleRatioValues();
+
+        $maleStrengthStandards = $this->generateStrengthStandards($compound_ids, $training_levels, $maleRatioValues, 'M');
+        $femaleStrengthStandards = $this->generateStrengthStandards($compound_ids, $training_levels, $femaleRatioValues, 'F');
+
+        foreach ($maleStrengthStandards as $standard) {
+            DB::table('strength_standards_levels')->insert($standard);
+        }
+
+        foreach ($femaleStrengthStandards as $standard) {
+            DB::table('strength_standards_levels')->insert($standard);
+        }
+    }
+
+    protected function generateStrengthStandards($compound_ids, $training_levels, $ratioValues, $gender)
+    {
+        $strengthStandards = [];
 
         foreach ($compound_ids as $compound_id) {
             foreach ($training_levels as $training_level) {
@@ -45,21 +59,18 @@ return new class extends Migration
                 $min_ratio = $ratioValuesForCompound['min'];
                 $max_ratio = $ratioValuesForCompound['max'];
 
-                // Add the record to the array
-                $strength_standards[] = [
+                $strengthStandards[] = [
                     'compound_id' => $compound_id,
                     'training_level' => $training_level,
                     'years_of_lifting' => $years_of_lifting,
                     'min_ratio' => $min_ratio,
                     'max_ratio' => $max_ratio,
-                    'gender' => 'M',
+                    'gender' => $gender,
                 ];
             }
         }
 
-        foreach ($strength_standards as $standard) {
-            DB::table('strength_standards_levels')->insert($standard);
-        }
+        return $strengthStandards;
     }
 
     /**
@@ -90,12 +101,41 @@ return new class extends Migration
      * // 1 -> deadlift
      * // 2 -> bench
      * // 3 -> squat
-     * // 4 -> overhead press
      * @return array
      */
-    protected function getRatioValues()
+    protected function getFemaleRatioValues()
     {
+        return [
+            1 => [
+                'beginner' => ['min' => 0.5, 'max' => 1],
+                'intermediate' => ['min' => 1.25, 'max' => 1.75],
+                'advanced' => ['min' => 1.75, 'max' => 2.25],
+                'elite' => ['min' => 2.25, 'max' => 3],
 
+            ],
+            2 => [
+                'beginner' => ['min' => 0.5, 'max' => 0.5],
+                'intermediate' => ['min' => 0.5, 'max' => 0.75],
+                'advanced' => ['min' => 0.75, 'max' => 1],
+                'elite' => ['min' => 1, 'max' => 1.25],
+            ],
+            3 => [
+                'beginner' => ['min' => 0.5, 'max' => 1],
+                'intermediate' => ['min' => 1, 'max' => 1.5],
+                'advanced' => ['min' => 1.5, 'max' => 1.75],
+                'elite' => ['min' => 1.75, 'max' => 2.25],
+            ],
+        ];
+    }
+
+    /**
+     * // 1 -> deadlift
+     * // 2 -> bench
+     * // 3 -> squat
+     * @return array
+     */
+    protected function getMaleRatioValues()
+    {
         return [
             1 => [
                 'beginner' => ['min' => 1.5, 'max' => 1.5],
