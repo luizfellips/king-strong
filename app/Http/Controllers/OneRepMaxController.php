@@ -48,6 +48,7 @@ class OneRepMaxController extends Controller
         $height = $request->input('height');
         $weight = $request->input('weight');
         $years_of_lifting = $request->input('years_of_lifting');
+        $gender = $request->input('gender');
 
         if (!$height || !$weight || !$years_of_lifting) {
             return redirect()->route('onerepmax.step2')->with('error', 'Por favor preencha todos os campos.');
@@ -61,12 +62,12 @@ class OneRepMaxController extends Controller
         }
 
 
-        // Save the lifter to the database
         try {
             $lifter->update([
                 'height' => $height,
                 'weight' => $weight,
                 'years_of_lifting' => $years_of_lifting,
+                'gender' => $gender,
             ]);
 
             return view('onerepmax.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
@@ -85,36 +86,37 @@ class OneRepMaxController extends Controller
 
     public function process(Request $request)
     {
-        $total = $request->input('compoundWeight');
-        $reps = $request->input('reps');
-        $repsInReserve = $request->input('repsInReserve');
-        $compound = Compound::find($request->input('compound_id'));
-        $lifter = Lifter::find($request->input('lifter_id'));
+        $input = $this->validateInputs($request);
 
-        $results = $this->oneRepMaxService->getWeightChart($total, $reps, $repsInReserve);
-        $percentOfRelativeIntensity = $this->oneRepMaxService->getPercentOfRelativeIntensity($reps, $repsInReserve);
+        $compound = Compound::findOrFail($input['compound_id']);
+        $lifter = Lifter::findOrFail($input['lifter_id']);
 
         try {
-            $this->oneRepMaxService->registerLifterRecord($lifter, $compound, $total, $reps + $repsInReserve);
-            $trainingLevel = $this->strengthComparisonService->getTrainingLevel($lifter, $compound);
-            $standards = $this->strengthComparisonService->getStrengthStandardsByTime($lifter, $compound);
-            $example = $this->oneRepMaxService->getExample($standards['minRatio'], $standards['maxRatio']);
-            $oneRepMax = $this->oneRepMaxService->getOneRepMax($total, $reps + $repsInReserve);
-            $weightRatio = $this->oneRepMaxService->getRatio($lifter, $oneRepMax);
+            $this->oneRepMaxService->registerLifterRecord($lifter, $compound, $input);
+
+            $strengthComparisonDetails = $this->strengthComparisonService->getFullDetails($lifter, $compound);
+            $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $strengthComparisonDetails, $input);
 
             return view('onerepmax.finalStep', [
-                'results' => $results,
-                'percentOfRelativeIntensity' => $percentOfRelativeIntensity,
-                'trainingLevel' => $trainingLevel,
-                'standards' => $standards,
                 'lifter' => $lifter,
-                'weightRatio' => $weightRatio,
-                'oneRepMax' => $oneRepMax,
                 'compound' => $compound,
-                'example' => $example,
+                ...$strengthComparisonDetails,
+                ...$oneRepMaxDetails,
             ]);
+
         } catch (\Throwable $th) {
             throw new \Exception($th->getMessage(), 1);
         }
+    }
+
+    private function validateInputs(Request $request)
+    {
+        return $request->validate([
+            'compoundWeight' => 'required|numeric',
+            'reps' => 'required|integer',
+            'repsInReserve' => 'required|integer',
+            'compound_id' => 'required|exists:compounds,id',
+            'lifter_id' => 'required|exists:lifters,id',
+        ]);
     }
 }

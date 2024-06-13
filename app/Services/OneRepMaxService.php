@@ -6,6 +6,21 @@ use App\Models\LifterRecord;
 
 class OneRepMaxService
 {
+    public function getFullDetails($lifter, $strengthComparisonDetails, $input) {
+        $example = $this->getExample($lifter->gender, $strengthComparisonDetails['standards']['minRatio'], $strengthComparisonDetails['standards']['maxRatio']);
+        $oneRepMax = $this->getOneRepMax($input['compoundWeight'], $input['reps'] + $input['repsInReserve']);
+        $weightRatio = $this->getRatio($lifter, $oneRepMax);
+        $results = $this->getWeightChart($input['compoundWeight'], $input['reps'], $input['repsInReserve']);
+        $percentOfRelativeIntensity = $this->getPercentOfRelativeIntensity($input['reps'], $input['repsInReserve']);
+
+        return [
+            'example' => $example,
+            'oneRepMax' => $oneRepMax,
+            'weightRatio' => $weightRatio,
+            'results' => $results,
+            'percentOfRelativeIntensity' => $percentOfRelativeIntensity
+        ];
+    }
     public function getWeightChart($total, $reps, $repsInReserve)
     {
         $possibleReps = $reps + $repsInReserve;
@@ -14,12 +29,19 @@ class OneRepMaxService
         return $weights;
     }
 
-    public function getRatio($lifter, $oneRepMax) {
+    public function getRatio($lifter, $oneRepMax)
+    {
         return $oneRepMax / $lifter->weight;
     }
 
-    public function getExample($minRatio, $maxRatio) {
-        $weight = 80;
+    public function getExample($gender, $minRatio, $maxRatio)
+    {
+        $weight = ($gender == 'M') ? 80 : (($gender == 'F') ? 60 : null);
+
+        if ($weight === null) {
+            return "Invalid gender specified.";
+        }
+
         $total1 = $weight * $minRatio;
         $total2 = $weight * $maxRatio;
 
@@ -28,9 +50,11 @@ class OneRepMaxService
         ];
     }
 
-    public function registerLifterRecord($lifter, $compound, $total, $reps)
+    public function registerLifterRecord($lifter, $compound, $input)
     {
         $lifterRecord = LifterRecord::find($lifter->id, ['lifter_id']);
+        $total = $input['compoundWeight'];
+        $reps =  $input['reps'] + $input['repsInReserve'];
 
         if ($lifterRecord) {
             return;
