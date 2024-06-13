@@ -94,8 +94,13 @@ class OneRepMaxController extends Controller
         try {
             $this->oneRepMaxService->registerLifterRecord($lifter, $compound, $input);
 
-            $strengthComparisonDetails = $this->strengthComparisonService->getFullDetails($lifter, $compound);
-            $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $strengthComparisonDetails, $input);
+            $strengthComparisonDetails = [];
+
+            if($compound->id !== 4) {
+                $strengthComparisonDetails = $this->strengthComparisonService->getFullDetails($lifter, $compound);
+            }
+
+            $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $compound, $strengthComparisonDetails, $input);
 
             return view('onerepmax.finalStep', [
                 'lifter' => $lifter,

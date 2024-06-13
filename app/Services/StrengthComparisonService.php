@@ -37,8 +37,7 @@ class StrengthComparisonService
 
     public function getFullDetails($lifter, $compound) {
         return [
-            'standards' => $this->getStrengthStandardsByTime($lifter, $compound),
-            'trainingLevel' => $this->getTrainingLevel($lifter, $compound),
+            'standards' =>  $this->getStrengthStandardsByTime($lifter, $compound),
         ];
     }
 

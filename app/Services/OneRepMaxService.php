@@ -6,8 +6,17 @@ use App\Models\LifterRecord;
 
 class OneRepMaxService
 {
-    public function getFullDetails($lifter, $strengthComparisonDetails, $input) {
-        $example = $this->getExample($lifter->gender, $strengthComparisonDetails['standards']['minRatio'], $strengthComparisonDetails['standards']['maxRatio']);
+    protected $strengthComparisonService;
+
+    public function __construct(StrengthComparisonService $strengthComparisonService) {
+        $this->strengthComparisonService = $strengthComparisonService;
+    }
+    public function getFullDetails($lifter, $compound, $strengthComparisonDetails, $input)
+    {
+        $example = [];
+        if (!empty($strengthComparisonDetails)) {
+            $example = $this->getExample($lifter->gender, $strengthComparisonDetails['standards']['minRatio'], $strengthComparisonDetails['standards']['maxRatio']);
+        }
         $oneRepMax = $this->getOneRepMax($input['compoundWeight'], $input['reps'] + $input['repsInReserve']);
         $weightRatio = $this->getRatio($lifter, $oneRepMax);
         $results = $this->getWeightChart($input['compoundWeight'], $input['reps'], $input['repsInReserve']);
@@ -18,7 +27,9 @@ class OneRepMaxService
             'oneRepMax' => $oneRepMax,
             'weightRatio' => $weightRatio,
             'results' => $results,
-            'percentOfRelativeIntensity' => $percentOfRelativeIntensity
+            'percentOfRelativeIntensity' => $percentOfRelativeIntensity,
+            'trainingLevel' => $this->strengthComparisonService->getTrainingLevel($lifter, $compound),
+
         ];
     }
     public function getWeightChart($total, $reps, $repsInReserve)
