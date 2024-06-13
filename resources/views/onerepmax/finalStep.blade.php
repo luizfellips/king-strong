@@ -13,6 +13,7 @@
                     <th class="py-3 px-4 text-left">1RM Aprox.</th>
                     <th class="py-3 px-4 text-left">Proporção</th>
                     <th class="py-3 px-4 text-left">Categoria</th>
+                    <th class="py-3 px-4 text-left">Gênero</th>
                 </tr>
                 <tbody>
                     <tr>
@@ -21,6 +22,7 @@
                         <td class="py-3 px-4">{{ floor($oneRepMax) }}</td>
                         <td class="py-3 px-4">{{ round($weightRatio, 2) }}</td>
                         <td class="py-3 px-4">{{ $trainingLevel ? ucfirst($trainingLevel) : 'Não Avaliado' }}</td>
+                        <td class="py-3 px-4">{{ $lifter->gender == 'M' ? 'Masculino' : 'Feminino' }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -34,7 +36,22 @@
                         <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">2 e 5 anos de
                                 treino</span>:</h2>
                     @break
+                    @case('up_to_two_years')
+                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">6 meses e 2 anos
+                                de treino:</span>:</h2>
+                    @break
 
+                    @case('three_to_six_months')
+                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">3 e 6 meses de treino</span>:</h2>
+                    @break
+
+                    @case('five_or_more_years')
+                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">5 ou mais anos de treino:</span>:</h2>
+                    @break
+
+                    @case('ten_or_more_years')
+                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">10 ou mais anos de treino:</span>:</h2>
+                    @break
                     @default
                 @endswitch
                 <div class="flex flex-row py-1">
@@ -44,10 +61,18 @@
                             {{ $standards['maxRatio'] }}x</p>
                         <p class="pt-3">Ex.:</p>
                         @foreach ($example as $key => $value)
-                            <p class="pt-1">Um homem de {{ $key }}kg deve erguer um peso entre
-                                {{ $value[0] }}kg e {{ $value[1] }}kg</p>
-                            <p>para ser considerado <span
-                                    class="text-red-600 font-bold">{{ ucfirst($standards['trainingLevel']) }}</span>.</p>
+                        @if ($lifter->gender === 'M')
+                        <p class="pt-1">Um homem de {{ $key }}kg deve erguer um peso entre
+                            {{ $value[0] }}kg e {{ $value[1] }}kg</p>
+                        <p>para ser considerado <span
+                                class="text-red-600 font-bold">{{ ucfirst($standards['trainingLevel']) }}</span>.</p>
+                        @else
+                        <p class="pt-1">Uma mulher de {{ $key }}kg deve erguer um peso entre
+                            {{ $value[0] }}kg e {{ $value[1] }}kg</p>
+                        <p>para ser considerada <span
+                                class="text-red-600 font-bold">{{ ucfirst($standards['trainingLevel']) }}</span>.</p>
+                        @endif
+                            
                         @endforeach
                     </div>
                 </div>

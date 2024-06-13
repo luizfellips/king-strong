@@ -31,6 +31,16 @@
                     <option value="ten_or_more_years">10 anos ou mais</option>
                 </select>
             </div>
+
+            <div class="mb-4">
+                <label for="options" class="block text-gray-600">Qual o seu gênero?</label>
+                <select id="options" name="gender" required
+                    class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black">
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+            </div>
         </div>
         <x-button> Próximo </x-button>
     </form>
