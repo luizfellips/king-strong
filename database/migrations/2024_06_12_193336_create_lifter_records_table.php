@@ -16,6 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('lifter_id');
             $table->unsignedBigInteger('compound_id');
             $table->integer('one_rep_max')->nullable();
+            $table->integer('compound_total')->nullable();
+            $table->integer('reps')->nullable();
+            $table->integer('reps_in_reserve')->nullable();
+            $table->string('training_level')->nullable();
+
             $table->timestamps();
 
             $table->foreign('compound_id')->references('id')->on('compounds')->onDelete('cascade');

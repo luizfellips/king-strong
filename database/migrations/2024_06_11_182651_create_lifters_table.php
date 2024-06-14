@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('height')->nullable();
             $table->string('years_of_lifting')->nullable();
             $table->char('gender')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
