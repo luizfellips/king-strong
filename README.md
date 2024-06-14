@@ -5,6 +5,14 @@
 
 ![image](https://github.com/luizfellips/powermaromba/assets/110192027/6cbd2572-7d57-4309-8966-8cebab8aadfa)
 
+# Instalação
+1. Clone este repositório através de `git clone https://github.com/luizfellips/king-strong.git`
+2. Execute o comando `npm i` no diretório do projeto.
+3. Instale as dependências de composer através de `composer install`.
+4. Rode as migrações de banco de dados através de `php artisan migrate`
+5. Rode o servidor principal através de `php artisan serve`
+6. Rode o servidor de desenvolvimento através de `npm run dev`
+
 # Funcionalidades
 
 ## One Rep Max: 
