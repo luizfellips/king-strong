@@ -14,21 +14,26 @@ class OneRepMaxService
     public function getFullDetails($lifter, $compound, $strengthComparisonDetails, $input)
     {
         $example = [];
+        
         if (!empty($strengthComparisonDetails)) {
             $example = $this->getExample($lifter->gender, $strengthComparisonDetails['standards']['minRatio'], $strengthComparisonDetails['standards']['maxRatio']);
         }
+
         $oneRepMax = $this->getOneRepMax($input['compoundWeight'], $input['reps'] + $input['repsInReserve']);
         $weightRatio = $this->getRatio($lifter, $oneRepMax);
+
         $results = $this->getWeightChart($input['compoundWeight'], $input['reps'], $input['repsInReserve']);
         $percentOfRelativeIntensity = $this->getPercentOfRelativeIntensity($input['reps'], $input['repsInReserve']);
 
+        $trainingLevel = $this->strengthComparisonService->getTrainingLevel($lifter, $compound);
+        
         return [
             'example' => $example,
             'oneRepMax' => $oneRepMax,
             'weightRatio' => $weightRatio,
             'results' => $results,
             'percentOfRelativeIntensity' => $percentOfRelativeIntensity,
-            'trainingLevel' => $this->strengthComparisonService->getTrainingLevel($lifter, $compound),
+            'trainingLevel' => $trainingLevel,
 
         ];
     }
@@ -64,19 +69,25 @@ class OneRepMaxService
     public function registerLifterRecord($lifter, $compound, $input)
     {
         $lifterRecord = LifterRecord::find($lifter->id, ['lifter_id']);
-        $total = $input['compoundWeight'];
-        $reps =  $input['reps'] + $input['repsInReserve'];
+        $compoundTotal = $input['compoundWeight'];
+        $reps = $input['reps'];
+        $repsInReserve = $input['repsInReserve'];
+        $possibleReps =  $input['reps'] + $input['repsInReserve'];
+        $oneRepMax = $this->getOneRepMax($compoundTotal, $possibleReps);
+        $trainingLevel = $this->strengthComparisonService->calculateTrainingLevel($oneRepMax, $compound, $lifter->weight, $lifter->gender);
 
         if ($lifterRecord) {
             return;
         }
 
-        $oneRepMax = $this->getOneRepMax($total, $reps);
-
         LifterRecord::create([
             'lifter_id' => $lifter->id,
             'compound_id' => $compound->id,
             'one_rep_max' => $oneRepMax,
+            'reps' => $reps,
+            'reps_in_reserve' => $repsInReserve,
+            'compound_total' => $compoundTotal,
+            'training_level' => $trainingLevel, 
         ]);
     }
 
