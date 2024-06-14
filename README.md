@@ -74,9 +74,10 @@ Geração de uma tabela com porcentagens de 50% a 100% do 1RM, indicando as carg
 
 Esta funcionalidade visa proporcionar uma ferramenta completa e fácil de usar para atletas, treinadores e entusiastas de fitness que desejam acompanhar e melhorar seu desempenho em exercícios de força.
 ## Galeria de Imagens
-| ![image](https://github.com/luizfellips/powermaromba/assets/110192027/0554a727-a4c3-4a45-8c77-c3c81de41a46) | ![image](https://github.com/luizfellips/powermaromba/assets/110192027/f066757d-6316-432f-b968-7014d4e2bf15) |
+
+| ![image](https://github.com/luizfellips/king-strong/assets/110192027/aa03c386-4e55-4944-a1eb-36f6d531fdc4) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/5d67fd78-176c-43f5-ad9f-c7beaaf24438) |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| ![image](https://github.com/luizfellips/powermaromba/assets/110192027/0bed5e1d-b2ac-44e2-84f1-0fe794bf7a0a) | ![image](https://github.com/luizfellips/powermaromba/assets/110192027/602051b9-85d6-4dea-8a8e-233bf5ad7dbd) |
-| ![image](https://github.com/luizfellips/powermaromba/assets/110192027/48a132bf-c14e-4b49-93e2-bb05ee96b19f) | ![image](https://github.com/luizfellips/powermaromba/assets/110192027/f320c6e7-0f03-4582-98e2-554e08084064) |
+| ![image](https://github.com/luizfellips/king-strong/assets/110192027/a92b983d-3ae3-4661-bf52-ccab4045cd11) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/43edab0d-2fcd-4554-ab76-204dea9a9ca0) |
+| ![image](https://github.com/luizfellips/king-strong/assets/110192027/ab000456-6317-4a34-b010-fa01abb19f59) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/7a19a793-8ff3-42b2-a49a-d0ee6a1750b2) |
 
 
