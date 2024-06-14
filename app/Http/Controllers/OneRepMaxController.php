@@ -1,12 +1,18 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Lifter;
 use App\Models\Compound;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Services\OneRepMaxService;
+use App\Http\Requests\LifterRequest;
+use App\Http\Requests\RecordRequest;
 use App\Services\StrengthComparisonService;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class OneRepMaxController extends Controller
 {
@@ -21,46 +27,64 @@ class OneRepMaxController extends Controller
 
     public function step1()
     {
+        session()->forget('lifter');
+
         return view('onerepmax.step1');
     }
 
-    public function step2(Request $request)
-    {
-        $name = $request->input('name');
+    
 
-        if (!$name) {
-            return redirect()->route('onerepmax.step1')->with('error', 'Insira seu nome!');
-        }
+    public function processStep1(Request $request)
+    {
+        $input = $this->validateLifterName($request);
+
+        $name = $input['name'];
 
         try {
             $lifter = Lifter::create(['name' => $name]);
 
+            session()->put('lifter', $lifter->slug);
 
-            return view('onerepmax.step2', ['lifter' => $lifter]);
+            return redirect()->route('onerepmax.step2', ['lifterSlug' => $lifter->slug]);
         } catch (\Throwable $th) {
-            throw new \Exception($th->getMessage(), $th->getCode());
+            return redirect()->back()->withInput()->withErrors(['Um Erro ocorreu ao registrar o levantador. Contate o suporte.']);
         }
     }
 
-    public function step3(Request $request)
+    private function checkCurrentLifter(Lifter $lifter)
     {
-        $lifterId = $request->input('lifter_id');
-        $height = $request->input('height');
-        $weight = $request->input('weight');
-        $years_of_lifting = $request->input('years_of_lifting');
-        $gender = $request->input('gender');
-
-        if (!$height || !$weight || !$years_of_lifting) {
-            return redirect()->route('onerepmax.step2')->with('error', 'Por favor preencha todos os campos.');
+        if (!session()->has('lifter')) {
+            return redirect()->route('onerepmax.step1');
         }
 
-        $lifter = Lifter::find($lifterId);
-        $compounds = Compound::with('muscles')->get();
+        if ($lifter->slug !== session()->get('lifter')) {
+            return redirect()->route('onerepmax.step1')->withErrors(['Erro de Autorização.']);
+        }
+    }
 
-        if (!$lifter) {
-            return redirect()->route('onerepmax.step1')->with('error', 'Lifter not found');
+    public function step2($lifterSlug)
+    {
+        $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
+
+        $redirect = $this->checkCurrentLifter($lifter);
+        if ($redirect) {
+            return $redirect;
         }
 
+        return view('onerepmax.step2', ['lifter' => $lifter]);
+    }
+
+    public function processStep2(LifterRequest $request)
+    {
+        $input = $request->validated();
+
+        $lifterSlug = $input['lifter_slug']; // Retrieve slug from input
+        $height = $input['height'];
+        $weight = $input['weight'];
+        $years_of_lifting = $input['years_of_lifting'];
+        $gender = $input['gender'];
+
+        $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
 
         try {
             $lifter->update([
@@ -70,58 +94,114 @@ class OneRepMaxController extends Controller
                 'gender' => $gender,
             ]);
 
-            return view('onerepmax.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
+            return redirect()->route('onerepmax.step3', ['lifterSlug' => $lifter->slug]);
         } catch (\Throwable $th) {
-            throw new \Exception($th->getMessage(), $th->getCode());
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while updating the lifter.']);
         }
     }
 
-    public function step4(Request $request)
+    public function step3($lifterSlug)
     {
-        $compound = Compound::find($request->input('compound_id'));
-        $lifter = Lifter::find($request->input('lifter_id'));
+        $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
+        $redirect = $this->checkCurrentLifter($lifter);
+
+        if ($redirect) {
+            return $redirect;
+        }
+
+        $compounds = Compound::with('muscles')->get();
+        return view('onerepmax.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
+    }
+
+    public function processStep3(Request $request)
+    {
+        $compoundSlug = $request->input('compound_slug');
+        $lifterSlug = $request->input('lifter_slug');
+
+        return redirect()->route('onerepmax.step4', ['lifterSlug' => $lifterSlug, 'compoundSlug' => $compoundSlug]);
+    }
+
+    public function step4($lifterSlug, $compoundSlug)
+    {
+        $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
+        $compound = Compound::where('slug', $compoundSlug)->firstOrFail();
+        $redirect = $this->checkCurrentLifter($lifter);
+
+        if ($redirect) {
+            return $redirect;
+        }
 
         return view('onerepmax.step4', ['lifter' => $lifter, 'compound' => $compound]);
     }
 
-    public function process(Request $request)
+    public function processStep4(RecordRequest $request)
     {
-        $input = $this->validateInputs($request);
+        $input = $request->validated();
 
-        $compound = Compound::findOrFail($input['compound_id']);
-        $lifter = Lifter::findOrFail($input['lifter_id']);
+        $compoundSlug = $input['compound_slug']; // Retrieve slug from input
+        $lifterSlug = $input['lifter_slug']; // Retrieve slug from input
+
+        $compound = Compound::where('slug', $compoundSlug)->firstOrFail();
+        $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
 
         try {
             $this->oneRepMaxService->registerLifterRecord($lifter, $compound, $input);
+            session(['input' => $input]);
 
-            $strengthComparisonDetails = [];
-
-            if($compound->id !== 4) {
-                $strengthComparisonDetails = $this->strengthComparisonService->getFullDetails($lifter, $compound);
-            }
-
-            $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $compound, $strengthComparisonDetails, $input);
-
-            return view('onerepmax.finalStep', [
-                'lifter' => $lifter,
-                'compound' => $compound,
-                ...$strengthComparisonDetails,
-                ...$oneRepMaxDetails,
+            return redirect()->route('onerepmax.finalStep', [
+                'lifterSlug' => $lifter->slug,
+                'compoundSlug' => $compound->slug,
             ]);
-
         } catch (\Throwable $th) {
-            throw new \Exception($th->getMessage(), 1);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while updating the lifter.']);
         }
     }
 
-    private function validateInputs(Request $request)
+    public function finalStep($lifterSlug, $compoundSlug)
+    {
+        $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
+        $compound = Compound::where('slug', $compoundSlug)->firstOrFail();
+        $redirect = $this->checkCurrentLifter($lifter);
+
+        if ($redirect) {
+            return $redirect;
+        }
+
+        session()->forget('lifter');
+        $input = session('input', []);
+
+        $strengthComparisonDetails = [];
+
+        if ($compound->id !== 4) {
+            $strengthComparisonDetails = $this->strengthComparisonService->getFullDetails($lifter, $compound);
+        }
+
+        $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $compound, $strengthComparisonDetails, $input);
+
+        return view('onerepmax.finalStep', [
+            'lifter' => $lifter,
+            'compound' => $compound,
+            ...$strengthComparisonDetails,
+            ...$oneRepMaxDetails,
+        ]);
+    }
+
+    private function validateLifterName(Request $request)
     {
         return $request->validate([
-            'compoundWeight' => 'required|numeric',
-            'reps' => 'required|integer',
-            'repsInReserve' => 'required|integer',
-            'compound_id' => 'required|exists:compounds,id',
-            'lifter_id' => 'required|exists:lifters,id',
+            'name' => [
+                'required',
+                'string',
+                'min:2',
+                'max:255',
+                'regex:/^[a-zA-ZÀ-ÿ\s]+$/'
+            ]
+        ], [
+            'name.required' => 'O nome é obrigatório.',
+            'name.string' => 'O nome deve ser um texto.',
+            'name.min' => 'O nome deve ter pelo menos 2 caracteres.',
+            'name.max' => 'O nome deve ter no máximo 255 caracteres.',
+            'name.regex' => 'O nome deve conter apenas letras e espaços.',
         ]);
     }
 }
