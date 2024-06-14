@@ -78,6 +78,6 @@ Esta funcionalidade visa proporcionar uma ferramenta completa e fácil de usar p
 | ![image](https://github.com/luizfellips/king-strong/assets/110192027/aa03c386-4e55-4944-a1eb-36f6d531fdc4) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/5d67fd78-176c-43f5-ad9f-c7beaaf24438) |
 | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | ![image](https://github.com/luizfellips/king-strong/assets/110192027/a92b983d-3ae3-4661-bf52-ccab4045cd11) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/43edab0d-2fcd-4554-ab76-204dea9a9ca0) |
-| ![image](https://github.com/luizfellips/king-strong/assets/110192027/ab000456-6317-4a34-b010-fa01abb19f59) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/7a19a793-8ff3-42b2-a49a-d0ee6a1750b2) |
+| ![image](https://github.com/luizfellips/king-strong/assets/110192027/ab000456-6317-4a34-b010-fa01abb19f59) | ![image](https://github.com/luizfellips/king-strong/assets/110192027/cc6a02e1-1995-4458-8b53-c662237efd0c) |
 
 
