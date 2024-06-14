@@ -1,66 +1,62 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# King Strong
+É um aplicativo responsivo em processo de construção que englobará diversas funcionalidades que facilitem a eficiência na construção e análise de blocos de treinos voltados para powerlifting / hipertrofia máxima, análise de divisões de treinos e busca por redundâncias e opções mais eficazes.
 
-## About Laravel
+![image](https://github.com/luizfellips/powermaromba/assets/110192027/6cbd2572-7d57-4309-8966-8cebab8aadfa)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Funcionalidades
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## One Rep Max: 
+Cálculo de 1RM e Categorização de Nível de Força
+Este projeto apresenta uma funcionalidade robusta para o cálculo do máximo de repetição (1RM) e categorização de nível de força com base em diversos parâmetros fornecidos pelo usuário. 
+A funcionalidade permite uma análise detalhada de aproximações de cargas por porcentagem e personalizada do desempenho em exercícios de força.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Funcionalidades Principais:
+Entrada de Dados do Usuário:
 
-## Learning Laravel
+Nome
+Altura
+Peso
+Tempo de treino
+Seleção de Exercício:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+O usuário pode escolher um exercício específico de uma lista pré-definida.
+Informações detalhadas sobre o exercício selecionado são exibidas.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Registro de Desempenho no Exercício:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Quantidade máxima de repetições realizadas.
+Repetições em reserva.
+Peso utilizado.
+Cálculo do 1RM:
 
-## Laravel Sponsors
+Utiliza os dados fornecidos para calcular o 1RM (one-repetition maximum) do exercício selecionado, com base em cálculos matemáticos como Equação de Epley.
+Geração de uma tabela com porcentagens de 50% a 100% do 1RM, indicando as cargas aproximadas para cada porcentagem.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Análise de Nível de Força:
 
-### Premium Partners
+- Com base na proporção entre peso corporal, carga, repetições e tempo de treino, a funcionalidade categoriza o usuário em um nível de força pré-definido com base em diversos estudos.
+- Comparação com padrões de desempenho para fornecer uma classificação precisa.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Benefícios:
+- Personalização: Considera múltiplos fatores individuais para fornecer resultados precisos e personalizados.
+- Informações Detalhadas: Exibe informações detalhadas sobre os exercícios, auxiliando na escolha e entendimento dos mesmos.
+- Monitoramento de Progresso: Facilita o acompanhamento do progresso do usuário ao longo do tempo.
+- Motivação e Objetividade: Oferece uma categorização clara do nível de força, incentivando o usuário a atingir novos objetivos.
 
-## Contributing
+### Como Utilizar:
+- Inserir Dados Pessoais: Preencha as informações básicas sobre você.
+- Selecionar Exercício: Escolha um exercício da lista e visualize suas informações.
+- Registrar Desempenho: Insira os dados sobre seu desempenho no exercício.
+- Calcular 1RM: Veja seu 1RM calculado e a tabela de porcentagens com cargas correspondentes e suas respectivas faixas de repetições.
+- Verificar Nível de Força: Confira sua categorização de nível de força baseada nos dados fornecidos.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Esta funcionalidade visa proporcionar uma ferramenta completa e fácil de usar para atletas e entusiastas de fitness que desejam acompanhar e melhorar seu desempenho em exercícios de força.
+## Galeria de Imagens
+| ![image](https://github.com/luizfellips/powermaromba/assets/110192027/0554a727-a4c3-4a45-8c77-c3c81de41a46) | ![image](https://github.com/luizfellips/powermaromba/assets/110192027/f066757d-6316-432f-b968-7014d4e2bf15) |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| ![image](https://github.com/luizfellips/powermaromba/assets/110192027/0bed5e1d-b2ac-44e2-84f1-0fe794bf7a0a) | ![image](https://github.com/luizfellips/powermaromba/assets/110192027/602051b9-85d6-4dea-8a8e-233bf5ad7dbd) |
+| ![image](https://github.com/luizfellips/powermaromba/assets/110192027/48a132bf-c14e-4b49-93e2-bb05ee96b19f) | ![image](https://github.com/luizfellips/powermaromba/assets/110192027/f320c6e7-0f03-4582-98e2-554e08084064) |
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
