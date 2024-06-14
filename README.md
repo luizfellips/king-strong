@@ -24,7 +24,8 @@
 # Funcionalidades
 
 ## One Rep Max: 
-Cálculo de 1RM e Categorização de Nível de Força
+- Cálculo de 1RM e Categorização de Nível de Força
+
 Este projeto apresenta uma funcionalidade robusta para o cálculo do máximo de repetição (1RM) e categorização de nível de força com base em diversos parâmetros fornecidos pelo usuário. 
 A funcionalidade permite uma análise detalhada de aproximações de cargas por porcentagem e personalizada do desempenho em exercícios de força.
 
