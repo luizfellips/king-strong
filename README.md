@@ -13,6 +13,14 @@
 5. Rode o servidor principal através de `php artisan serve`
 6. Rode o servidor de desenvolvimento através de `npm run dev`
 
+# Tecnologias
+- Laravel
+- Javascript
+- Laravel Blade
+- MySQL
+- Tailwind CSS
+- JQuery
+
 # Funcionalidades
 
 ## One Rep Max: 
