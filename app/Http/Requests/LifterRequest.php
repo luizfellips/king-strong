@@ -12,7 +12,7 @@ class LifterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,51 +26,52 @@ class LifterRequest extends FormRequest
             'height' => [
                 'required',
                 'integer',
-                'regex:/^[0-9]{1,9}$/',
-                'max:3',
+                'digits_between:1,4',
             ],
             'weight' => [
                 'required',
                 'integer',
-                'regex:/^[0-9]{1,9}$/',
-                'max:3',
+                'digits_between:1,4',
             ],
             'gender' => [
                 'required',
                 'string',
-                'regex:/^[MF]$',
-                'max:1',
+                'in:M,F',
             ],
             'years_of_lifting' => [
                 'required',
                 'string',
-                'max:255',
+                'in:three_to_six_months,up_to_two_years,two_to_five_years,five_or_more_years,ten_or_more_years',
+            ],
+            'lifter_slug' => [
+                'required',
+                'exists:lifters,slug',
+                'string',
             ],
         ];
     }
 
-
     public function messages(): array
-{
-    return [
-        'height.required' => 'A altura é obrigatória.',
-        'height.integer' => 'A altura deve ser um número inteiro.',
-        'height.regex' => 'A altura deve conter apenas números e ter no máximo 9 dígitos.',
-        'height.max' => 'A altura não pode ter mais de 3 caracteres.',
+    {
+        return [
+            'height.required' => 'A altura é obrigatória.',
+            'height.integer' => 'A altura deve ser um número inteiro.',
+            'height.digits_between' => 'A altura deve conter entre 1 e 4 dígitos.',
 
-        'weight.required' => 'O peso é obrigatório.',
-        'weight.integer' => 'O peso deve ser um número inteiro.',
-        'weight.regex' => 'O peso deve conter apenas números e ter no máximo 9 dígitos.',
-        'weight.max' => 'O peso não pode ter mais de 3 caracteres.',
+            'weight.required' => 'O peso é obrigatório.',
+            'weight.integer' => 'O peso deve ser um número inteiro.',
+            'weight.digits_between' => 'O peso deve conter entre 1 e 4 dígitos.',
 
-        'gender.required' => 'O gênero é obrigatório.',
-        'gender.string' => 'O gênero deve ser uma string.',
-        'gender.regex' => 'O gênero deve ser "M" ou "F".',
-        'gender.max' => 'O gênero deve ter exatamente 1 caractere.',
+            'gender.required' => 'O gênero é obrigatório.',
+            'gender.string' => 'O gênero deve ser uma string.',
+            'gender.in' => 'O gênero deve ser "M" ou "F".',
 
-        'years_of_lifting.required' => 'Os anos de levantamento são obrigatórios.',
-        'years_of_lifting.string' => 'Os anos de levantamento devem ser uma string.',
-        'years_of_lifting.max' => 'Os anos de levantamento não podem ter mais de 255 caracteres.',
-    ];
-}
+            'years_of_lifting.required' => 'Os anos de levantamento são obrigatórios.',
+            'years_of_lifting.string' => 'Os anos de levantamento devem ser uma string.',
+            'years_of_lifting.in' => 'Selecione uma opção válida para os anos de levantamento.',
+
+            'lifter_slug.required' => 'The lifter slug is required.',
+            'lifter_slug.exists' => 'The given lifter slug does not exist.',
+        ];
+    }
 }
