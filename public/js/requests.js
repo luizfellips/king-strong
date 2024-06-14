@@ -59,6 +59,6 @@ function processData(data) {
         }
     });
     $('#image').attr('img_url', data.imagePath);
-    $('#compound_id').val(data.id);
+    $('#compound_slug').val(data.slug);
     $('#myModal').fadeIn();
 }
