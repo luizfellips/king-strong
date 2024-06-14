@@ -1,4 +1,4 @@
-![image](https://github.com/luizfellips/king-strong/assets/110192027/98494402-7ef3-4f5c-bb6a-e474fb72e890)<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 # King Strong
 É um aplicativo responsivo em processo de construção que englobará diversas funcionalidades que facilitem a eficiência na construção e análise de blocos de treinos voltados para powerlifting / hipertrofia máxima, análise de divisões de treinos e busca por redundâncias e opções mais eficazes.
