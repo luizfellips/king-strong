@@ -6,13 +6,8 @@ use App\Models\StrengthStandardsLevel;
 
 class StrengthComparisonService
 {
-    public function getTrainingLevel($lifter, $compound)
+    public function calculateTrainingLevel($oneRepMax, $compound, $weight, $gender)
     {
-        $lifterRecord = $lifter->getLifterRecordForCompound($compound->id);
-
-        $weight = $lifter->weight;
-        $oneRepMax = $lifterRecord->one_rep_max;
-        $gender = $lifter->gender;
 
         $ratio = round($oneRepMax / $weight, 2);
 
@@ -32,7 +27,12 @@ class StrengthComparisonService
             return null; // Handle case where no strength standard level is found
         }
 
-        return $strengthStandard->training_level;
+        return $compound->id !== 4 ? $strengthStandard->training_level : 'Não Registrado';
+    }
+
+    public function getTrainingLevel($lifter, $compound) 
+    {
+        return  $lifter->getLifterRecordForCompound($compound->id)->training_level;
     }
 
     public function getFullDetails($lifter, $compound) {
