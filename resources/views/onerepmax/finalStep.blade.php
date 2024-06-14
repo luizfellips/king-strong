@@ -34,7 +34,7 @@
         
             <!-- Responsive Card Layout for smaller screens -->
             <div class="sm:hidden w-full">
-                <div class="background text-sm text-gray-700 p-4 rounded-lg">
+                <div class="background text-sm text-white p-4 rounded-lg">
                     <h2 class="text-xl">Suas Informações</h2>
                     <div class="py-2 flex justify-between mt-2 border-gray-600">
                         <span class="font-bold">Nome:</span> {{ $lifter->name }}
@@ -73,21 +73,21 @@
                     @break
 
                     @case('three_to_six_months')
-                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">3 e 6 meses de treino</span>:</h2>
+                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">3 e 6 meses de treino</span>:</h2>
                     @break
 
                     @case('five_or_more_years')
-                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">5 ou mais anos de treino:</span>:</h2>
+                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">5 ou mais anos de treino:</span>:</h2>
                     @break
 
                     @case('ten_or_more_years')
-                        <h2 class="text-base text-grey p-1 text-center">Média de 1RM Entre <span class="font-bold">10 ou mais anos de treino:</span>:</h2>
+                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">10 ou mais anos de treino:</span>:</h2>
                     @break
                     @default
                 @endswitch
                 <div class="flex flex-row py-1">
                     <div class="card text-center border-black px-5">
-                        <h1 class="title text-2xl text-grey">{{ $compound->name }}</h1>
+                        <h1 class="title text-2xl text-white">{{ $compound->name }}</h1>
                         <p class="text-xl text-white bg-red-700 rounded-md p-2">{{ $standards['minRatio'] }}x -
                             {{ $standards['maxRatio'] }}x</p>
                         <p class="pt-3">Ex.:</p>
