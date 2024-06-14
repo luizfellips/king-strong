@@ -89,7 +89,6 @@ class OneRepMaxService
             ["start" => 95, "end" => 75, "decrement" => 2.5],
             ["start" => 75, "end" => 70, "decrement" => 5],
             ["start" => 70, "end" => 65, "decrement" => 2.5],
-
         ];
 
         foreach ($ranges as $range) {

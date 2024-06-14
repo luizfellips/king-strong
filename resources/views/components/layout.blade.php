@@ -9,6 +9,10 @@
     <script src="{{ asset('js/jquery.inputmask.min.js') }}"></script>
     <title>PowerMaromba</title>
     <style>
+        .logo {
+           filter: invert();
+        }
+
         .fade-in {
             opacity: 0;
             transition: opacity 0.5s ease-in;
@@ -82,7 +86,7 @@
 <body>
     <div
         class="bg-gray-100 flex justify-center items-center {{ Request::route() && Request::route()->getName() !== 'onerepmax.process' ? 'h-screen' : '' }}">
-        <div class="lg:p-36 md:p-52 sm:20 p-8 fade-in">
+        <div class="lg:p-36 md:p-52 p-8 fade-in">
             <x-logo />
             <div class="isLoading h-screen fixed inset-0 hidden">
                 <div class="flex justify-center bg-black items-center h-screen bg-opacity-50">
