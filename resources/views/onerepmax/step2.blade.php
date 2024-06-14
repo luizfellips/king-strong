@@ -1,26 +1,37 @@
 <x-layout>
-    <h1 class="text-2xl font-medium flex justify-center mb-12">Olá {{ $lifter->name }}!</h1>
-    <form action="{{ route('onerepmax.step3') }}" method="POST">
+
+
+    <h1 class="text-2xl font-medium text-white flex justify-center mb-12">Olá {{ $lifter->name }}!</h1>
+    <form class="preventive" action="{{ route('onerepmax.processStep2') }}" method="POST">
         @csrf
-        <input type="hidden" name="lifter_id" value="{{ $lifter->id }}">
+        @if ($errors->any())
+        <div class="alert alert-danger my-2">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="bg-red-700 my-2 text-white rounded-xl p-3">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+        <input type="hidden" name="lifter_slug" value="{{ $lifter->slug }}">
 
         <div class="mb-5">
             <div class="mb-4">
-                <label class="block text-gray-600">Qual a sua altura em cm?</label>
-                <input type="text" id="height" required name="height"
+                <label class="block text-white">Qual a sua altura em cm?</label>
+                <input type="text" id="height" name="height"
                     class="numeric w-full border text-start border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-black"
                     autocomplete="off" placeholder="ex.: 180">
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-600">Qual o seu peso em kg?</label>
+                <label class="block text-white">Qual o seu peso em kg?</label>
                 <input type="text" required id="weight" name="weight"
                     class="numeric w-full border text-start border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
                     autocomplete="off" placeholder="ex.: 65">
             </div>
 
             <div class="mb-4">
-                <label for="options" class="block text-gray-600">Há quanto tempo você treina?</label>
+                <label for="options" class="block text-white">Há quanto tempo você treina?</label>
                 <select id="options" name="years_of_lifting" required
                     class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black">
                     <option value="" disabled selected>Selecione uma opção</option>
@@ -33,7 +44,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="options" class="block text-gray-600">Qual o seu gênero?</label>
+                <label for="options" class="block text-white">Qual o seu gênero?</label>
                 <select id="options" name="gender" required
                     class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black">
                     <option value="" disabled selected>Selecione uma opção</option>
@@ -42,7 +53,7 @@
                 </select>
             </div>
         </div>
-        <x-button> Próximo </x-button>
+        <x-button :isDark="true"> Próximo </x-button>
     </form>
     <script>
          $(document).ready(function(){

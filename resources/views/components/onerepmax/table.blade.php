@@ -2,10 +2,10 @@
 
 <table class="bg-white w-full w-100 shadow-md rounded-xl table-auto">
     <thead>
-        <tr class="bg-blue-gray-100 text-xs sm:text-base text-gray-700 table-row">
-            <th class="py-3 px-4 text-left">Carga Aprox.</th>
-            <th class="py-3 px-4 text-left">Repetições</th>
-            <th class="py-3 px-4 text-left">%1RM</th>
+        <tr class="bg-blue-gray-100 text-center text-xs sm:text-base text-gray-700 table-row">
+            <th class="py-3 px-4 text-center">Carga Aprox.</th>
+            <th class="py-3 px-4 text-center">Repetições</th>
+            <th class="py-3 px-4 text-center">%1RM</th>
         </tr>
     </thead>
     <tbody class="text-blue-gray-900">

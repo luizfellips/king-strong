@@ -43,8 +43,8 @@
         }
 
         .background {
-            background: rgb(157, 0, 0);
-            background: linear-gradient(0deg, rgba(157, 0, 0, 1) 0%, rgba(57, 4, 4, 1) 34%, rgba(0, 0, 0, 1) 100%);
+            background: rgb(50, 5, 5);
+            background: linear-gradient(0deg, rgba(50, 5, 5, 1) 0%, rgba(0, 0, 0, 1) 69%);
         }
 
         .fade-in {
@@ -56,6 +56,7 @@
             opacity: 1;
         }
     </style>
+    <title>King Strong</title>
 </head>
 
 <body class="background fade-in text-white font-sans flex flex-col justify-center items-center min-h-screen">

@@ -1,10 +1,10 @@
 <x-layout>
-    <h1 class="text-2xl text-center font-medium flex justify-center mb-12">Tabela de Porcentagem e Cargas</h1>
-    <p class="text-sm sm:text-base font-semibold text-center mb-8">Você efetuou o exercício à <span
+    <h1 class="text-2xl text-white text-center font-medium flex justify-center mb-12">Tabela de Porcentagem e Cargas</h1>
+    <p class="text-sm sm:text-base text-white font-semibold text-center mb-8">Você efetuou o exercício à <span
             class="text-red-600 text-lg px-1">
             {{ $percentOfRelativeIntensity }}%</span> da sua carga máxima.</p>
     <div class="flex flex-col items-center justify-center">
-        <h1 class="text-2xl pb-3 text-gray-950 text-center">{{$compound->name}}</h1>
+        <h1 class="text-2xl pb-3 text-white text-center">{{$compound->name}}</h1>
         <x-onerepmax.table :results="$results" :percentOfRelativeIntensity="$percentOfRelativeIntensity" />
         <div class="flex w-full flex-col items-center p-3 justify-center bg-white shadow-md rounded-xl mt-3">
             <div class="overflow-x-auto w-full">
@@ -36,22 +36,22 @@
             <div class="sm:hidden w-full">
                 <div class="bg-blue-gray-100 text-sm text-gray-700 p-4 rounded-lg">
                     <h2 class="text-xl">Suas Informações</h2>
-                    <div class="py-2">
+                    <div class="py-2 flex justify-between mt-2 border-gray-600">
                         <span class="font-bold">Nome:</span> {{ $lifter->name }}
                     </div>
-                    <div class="py-2">
+                    <div class="py-2 flex justify-between mt-2 border-t border-gray-600">
                         <span class="font-bold">Peso Corporal:</span> {{ $lifter->weight }}
                     </div>
-                    <div class="py-2">
+                    <div class="py-2 flex justify-between mt-2 border-t border-gray-600">
                         <span class="font-bold">1RM Aprox.:</span> {{ floor($oneRepMax) }}
                     </div>
-                    <div class="py-2">
+                    <div class="py-2 flex justify-between mt-2 border-t border-gray-600">
                         <span class="font-bold">Proporção:</span> {{ round($weightRatio, 2) }}
                     </div>
-                    <div class="py-2">
+                    <div class="py-2 flex justify-between mt-2 border-t border-gray-600">
                         <span class="font-bold">Categoria:</span> {{ $trainingLevel ? ucfirst($trainingLevel) : 'Não Avaliado' }}
                     </div>
-                    <div class="py-2">
+                    <div class="py-2 flex justify-between mt-2 border-t border-gray-600">
                         <span class="font-bold">Gênero:</span> {{ $lifter->gender == 'M' ? 'Masculino' : 'Feminino' }}
                     </div>
                 </div>
@@ -112,5 +112,5 @@
 
     </div>
     <a href="{{ route('onerepmax.step1') }}"><button
-            class="bg-black hover:bg-slate-800 transition-colors text-white font-semibold rounded-md py-2 mt-5 px-4 w-full">Voltar</button></a>
+            class="bg-black hover:bg-slate-800 transition-colors text-white font-semibold rounded-md py-2 flex justify-around border-y border-gray-600 mt-5 px-4 w-full">Voltar</button></a>
 </x-layout>
