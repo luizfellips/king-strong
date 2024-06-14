@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lifter extends Model
 {
@@ -15,8 +16,35 @@ class Lifter extends Model
         'height',
         'weight',
         'years_of_lifting',
-        'gender'
+        'gender',
+        'slug'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($lifter) {
+            $lifter->slug = $lifter->generateUniqueSlug($lifter->name);
+        });
+    }
+
+    protected function generateUniqueSlug($name, $lifterId = null)
+    {
+        $slug = Str::slug($name);
+        $newSlug = $slug;
+        $counter = 1;
+
+        // Check if a lifter with the same slug already exists
+        while (Lifter::where('slug', $newSlug)->where('id', '<>', $lifterId)->exists()) {
+            $newSlug = $slug . '-' . $counter;
+            $counter++;
+        }
+
+        return $newSlug;
+    }
+
+
 
     public function lifterRecord()
     {

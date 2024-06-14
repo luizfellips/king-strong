@@ -20,6 +20,7 @@ class CompoundResource extends JsonResource
             'description' => $this->description,
             'shortDescription' => $this->short_description,
             'imagePath' => $this->image_path,
+            'slug' => $this->slug,
             'muscles' => $this->muscles->pluck('name'),
         ];
     }

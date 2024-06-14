@@ -12,7 +12,11 @@ class LifterRecord extends Model
     protected $fillable = [
         'compound_id',
         'lifter_id',
-        'one_rep_max'
+        'one_rep_max',
+        'reps',
+        'reps_in_reserve',
+        'compound_total',
+        'training_level'
     ];
 
     public function lifter()
