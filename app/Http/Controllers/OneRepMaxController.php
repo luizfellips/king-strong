@@ -49,28 +49,9 @@ class OneRepMaxController extends Controller
         }
     }
 
-    private function checkCurrentLifter(Lifter $lifter)
-    {
-        if (!session()->has('lifter')) {
-            return redirect()->route('onerepmax.step1');
-        }
-
-        if ($lifter->slug !== session()->get('lifter')) {
-            $lifter = Lifter::where('slug', '=', session()->get('lifter'));
-            $lifter->delete();
-
-            return redirect()->route('onerepmax.step1')->withErrors(['Erro de Autorização.']);
-        }
-    }
-
     public function step2($lifterSlug)
     {
         $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
-
-        $redirect = $this->checkCurrentLifter($lifter);
-        if ($redirect) {
-            return $redirect;
-        }
 
         return view('onerepmax.step2', ['lifter' => $lifter]);
     }
@@ -104,11 +85,6 @@ class OneRepMaxController extends Controller
     public function step3($lifterSlug)
     {
         $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
-        $redirect = $this->checkCurrentLifter($lifter);
-
-        if ($redirect) {
-            return $redirect;
-        }
 
         $compounds = Compound::with('muscles')->get();
         return view('onerepmax.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
@@ -126,11 +102,6 @@ class OneRepMaxController extends Controller
     {
         $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
         $compound = Compound::where('slug', $compoundSlug)->firstOrFail();
-        $redirect = $this->checkCurrentLifter($lifter);
-
-        if ($redirect) {
-            return $redirect;
-        }
 
         return view('onerepmax.step4', ['lifter' => $lifter, 'compound' => $compound]);
     }
@@ -162,11 +133,6 @@ class OneRepMaxController extends Controller
     {
         $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
         $compound = Compound::where('slug', $compoundSlug)->firstOrFail();
-        $redirect = $this->checkCurrentLifter($lifter);
-
-        if ($redirect) {
-            return $redirect;
-        }
 
         session()->forget('lifter');
         $input = session('input', []);
