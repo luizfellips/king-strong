@@ -24,6 +24,19 @@ return new class extends Migration
             $table->foreign('muscle_id')->references('id')->on('muscles')->onDelete('cascade');
         });
 
+        $this->seedCompoundMuscleAssociations();
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('compound_muscles');
+    }
+
+    private function seedCompoundMuscleAssociations()
+    {
         $compounds = Compound::all();
 
         foreach ($compounds as $compound) {
@@ -58,13 +71,5 @@ return new class extends Migration
                 }
             }
         }
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('compound_muscles');
     }
 };

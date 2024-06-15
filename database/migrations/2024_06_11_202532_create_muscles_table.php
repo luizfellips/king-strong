@@ -17,6 +17,19 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        $this->seedMuscles();
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('muscles');
+    }
+
+    private function seedMuscles()
+    {
         $muscles = [
             "Quadríceps",
             "Isquiotibiais",
@@ -37,13 +50,5 @@ return new class extends Migration
                 'name' => $muscle
             ]);
         }
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('muscles');
     }
 };

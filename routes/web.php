@@ -11,7 +11,7 @@ Route::prefix('onerepmax')->name('onerepmax.')->group(function () {
     Route::get('/', [OneRepMaxController::class, 'step1'])->name('step1');
     Route::post('process-step1', [OneRepMaxController::class, 'processStep1'])->name('processStep1');
 
-    Route::middleware(['checkCurrentLifter'])->group(function () {
+    Route::middleware(CheckCurrentLifterMiddleware::class)->group(function () {
         Route::get('step2/{lifterSlug}', [OneRepMaxController::class, 'step2'])->name('step2');
         Route::post('process-step2', [OneRepMaxController::class, 'processStep2'])->name('processStep2');
 

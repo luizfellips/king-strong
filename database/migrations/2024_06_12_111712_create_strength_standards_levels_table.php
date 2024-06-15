@@ -28,43 +28,42 @@ return new class extends Migration
 
     protected function insertDefaultRecords()
     {
-        $compound_ids = [1, 2, 3];
+        $compoundIds = [1, 2, 3];
 
-        $training_levels = ['novice', 'beginner', 'intermediate', 'advanced', 'elite'];
+        $trainingLevels = ['novice', 'beginner', 'intermediate', 'advanced', 'elite'];
 
         $maleRatioValues = $this->getMaleRatioValues();
         $femaleRatioValues = $this->getFemaleRatioValues();
 
-        $maleStrengthStandards = $this->generateStrengthStandards($compound_ids, $training_levels, $maleRatioValues, 'M');
-        $femaleStrengthStandards = $this->generateStrengthStandards($compound_ids, $training_levels, $femaleRatioValues, 'F');
+        $maleStrengthStandards = $this->generateStrengthStandards($compoundIds, $trainingLevels, $maleRatioValues, 'M');
+        $femaleStrengthStandards = $this->generateStrengthStandards($compoundIds, $trainingLevels, $femaleRatioValues, 'F');
 
-        foreach ($maleStrengthStandards as $standard) {
-            DB::table('strength_standards_levels')->insert($standard);
-        }
-
-        foreach ($femaleStrengthStandards as $standard) {
-            DB::table('strength_standards_levels')->insert($standard);
-        }
+        $this->seedStrengthStandards($maleStrengthStandards, $femaleStrengthStandards);
     }
 
-    protected function generateStrengthStandards($compound_ids, $training_levels, $ratioValues, $gender)
+    protected function seedStrengthStandards($maleStrengthStandards, $femaleStrengthStandards)
+    {
+        DB::table('strength_standards_levels')->insert(array_merge($maleStrengthStandards, $femaleStrengthStandards));
+    }
+
+    protected function generateStrengthStandards($compoundIds, $trainingLevels, $ratioValues, $gender)
     {
         $strengthStandards = [];
 
-        foreach ($compound_ids as $compound_id) {
-            foreach ($training_levels as $training_level) {
-                $years_of_lifting = ($training_level === 'novice') ? 'three_to_six_months' : $this->getTimeOfTraining($training_level);
+        foreach ($compoundIds as $compoundId) {
+            foreach ($trainingLevels as $trainingLevel) {
+                $yearsOfLifting = ($trainingLevel === 'novice') ? 'three_to_six_months' : $this->getTimeOfTraining($trainingLevel);
 
-                $ratioValuesForCompound = $ratioValues[$compound_id][$training_level] ?? ['min' => 1.0, 'max' => 1.0];
-                $min_ratio = $ratioValuesForCompound['min'];
-                $max_ratio = $ratioValuesForCompound['max'];
+                $ratioValuesForCompound = $ratioValues[$compoundId][$trainingLevel] ?? ['min' => 1.0, 'max' => 1.0];
+                $minRatio = $ratioValuesForCompound['min'];
+                $maxRatio = $ratioValuesForCompound['max'];
 
                 $strengthStandards[] = [
-                    'compound_id' => $compound_id,
-                    'training_level' => $training_level,
-                    'years_of_lifting' => $years_of_lifting,
-                    'min_ratio' => $min_ratio,
-                    'max_ratio' => $max_ratio,
+                    'compound_id' => $compoundId,
+                    'training_level' => $trainingLevel,
+                    'years_of_lifting' => $yearsOfLifting,
+                    'min_ratio' => $minRatio,
+                    'max_ratio' => $maxRatio,
                     'gender' => $gender,
                 ];
             }
@@ -81,9 +80,9 @@ return new class extends Migration
         Schema::dropIfExists('strength_standards_levels');
     }
 
-    protected function getTimeOfTraining($training_level)
+    protected function getTimeOfTraining($trainingLevel)
     {
-        switch ($training_level) {
+        switch ($trainingLevel) {
             case 'beginner':
                 return 'up_to_two_years';
             case 'intermediate':
