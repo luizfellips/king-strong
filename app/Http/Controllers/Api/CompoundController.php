@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
+use App\Models\OneRepMax\Compound;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CompoundResource;
-use App\Models\Compound;
-use Illuminate\Http\Request;
 
 class CompoundController extends Controller
 {

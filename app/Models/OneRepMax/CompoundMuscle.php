@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\OneRepMax;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Muscle extends Model
+class CompoundMuscle extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
+        'compound_id',
+        'muscle_id',
     ];
 }

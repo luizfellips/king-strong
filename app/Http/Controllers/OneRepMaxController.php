@@ -3,16 +3,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lifter;
-use App\Models\Compound;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Services\OneRepMaxService;
+use App\Models\OneRepMax\Lifter;
+use App\Models\OneRepMax\Compound;
 use App\Http\Requests\LifterRequest;
 use App\Http\Requests\RecordRequest;
-use App\Services\StrengthComparisonService;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\OneRepMax\OneRepMaxService;
+use App\Services\OneRepMax\StrengthComparisonService;
 
 class OneRepMaxController extends Controller
 {
@@ -78,7 +75,7 @@ class OneRepMaxController extends Controller
 
             return redirect()->route('onerepmax.step3', ['lifterSlug' => $lifter->slug]);
         } catch (\Throwable $th) {
-            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while updating the lifter.']);
+            return redirect()->back()->withInput()->withErrors(['An error occurred while updating the lifter.']);
         }
     }
 

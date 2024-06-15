@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\OneRepMax;
 
-use App\Models\StrengthStandardsLevel;
+use App\Models\OneRepMax\StrengthStandardsLevel;
+
 
 class StrengthComparisonService
 {

@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Lifter;
 use Illuminate\Http\Request;
+use App\Models\OneRepMax\Lifter;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckCurrentLifterMiddleware

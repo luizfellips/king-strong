@@ -2,11 +2,10 @@
 
 namespace Tests\Unit;
 
-use Mockery;
 use Tests\TestCase;
-use App\Models\Lifter;
-use App\Models\Compound;
-use App\Services\OneRepMaxService;
+use App\Models\OneRepMax\Lifter;
+use App\Models\OneRepMax\Compound;
+use App\Services\OneRepMax\OneRepMaxService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OneRepMaxTest extends TestCase

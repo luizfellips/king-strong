@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\OneRepMax;
 
-use App\Models\LifterRecord;
+use App\Models\OneRepMax\LifterRecord;
+
 
 class OneRepMaxService
 {
