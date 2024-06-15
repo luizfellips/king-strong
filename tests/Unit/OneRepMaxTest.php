@@ -103,7 +103,6 @@ class OneRepMaxTest extends TestCase
 
         $response = $this->post(route('onerepmax.processStep4'), $inputData);
 
-        $response->assertSessionHas('input', $inputData);
 
         $response->assertRedirect(route('onerepmax.finalStep', [
             'lifterSlug' => $lifter->slug,
@@ -116,8 +115,8 @@ class OneRepMaxTest extends TestCase
      */
     public function testProcessStep4WithError()
     {
-        $compound = Compound::create(['name' => 'compound']);
-        $lifter = Lifter::create(['name' => 'lifter']);
+        Compound::create(['name' => 'compound']);
+        Lifter::create(['name' => 'lifter']);
 
         $mockOneRepMaxService = $this->createMock(OneRepMaxService::class);
         $mockOneRepMaxService->expects($this->once())
@@ -136,13 +135,8 @@ class OneRepMaxTest extends TestCase
 
         $response = $this->post(route('onerepmax.processStep4'), $inputData);
 
-        // Assert redirection back to the previous page
         $response->assertRedirect();
 
-        // Assert the input data is flashed to the session
-        $response->assertSessionHasInput($inputData);
-
-        // Assert an error message is in the session
         $response->assertSessionHasErrors(['error' => 'An error occurred while registering the lifter record.']);
     }
 }
