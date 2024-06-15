@@ -20,7 +20,7 @@ class StrengthComparisonService
             ->orWhere(function ($query) use ($ratio) {
                 $query->where('max_ratio', '<', $ratio);
             })
-            ->orderBy('max_ratio', 'desc') // Order by max_ratio descending to get the highest level first
+            ->orderBy('max_ratio', 'desc')
             ->first();
 
         if (!$strengthStandard) {
