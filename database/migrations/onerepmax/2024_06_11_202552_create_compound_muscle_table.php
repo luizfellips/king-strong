@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Muscle;
-use App\Models\Compound;
-use App\Models\CompoundMuscle;
+use App\Models\OneRepMax\Muscle;
+use App\Models\OneRepMax\Compound;
 use Illuminate\Support\Facades\Schema;
+use App\Models\OneRepMax\CompoundMuscle;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
