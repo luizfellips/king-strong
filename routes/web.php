@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OneRepMaxController;
-use App\Http\Middleware\CheckCurrentLifterMiddleware;
+use App\Http\Middleware\OneRepMax\CheckCurrentLifterMiddleware;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
