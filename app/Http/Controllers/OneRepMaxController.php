@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\OneRepMax\Lifter;
 use App\Models\OneRepMax\Compound;
-use App\Http\Requests\LifterRequest;
-use App\Http\Requests\RecordRequest;
 use App\Services\OneRepMax\OneRepMaxService;
+use App\Http\Requests\OneRepMax\LifterRequest;
+use App\Http\Requests\OneRepMax\RecordRequest;
 use App\Services\OneRepMax\StrengthComparisonService;
 
 class OneRepMaxController extends Controller
