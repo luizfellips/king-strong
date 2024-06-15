@@ -115,7 +115,6 @@ class OneRepMaxController extends Controller
 
         try {
             $this->oneRepMaxService->registerLifterRecord($lifter, $compound, $input);
-            session(['input' => $input]);
 
             return redirect()->route('onerepmax.finalStep', [
                 'lifterSlug' => $lifter->slug,
@@ -132,7 +131,6 @@ class OneRepMaxController extends Controller
         $compound = Compound::where('slug', $compoundSlug)->firstOrFail();
 
         session()->forget('lifter');
-        $input = session('input', []);
 
         $strengthComparisonDetails = [];
 
@@ -140,7 +138,7 @@ class OneRepMaxController extends Controller
             $strengthComparisonDetails = $this->strengthComparisonService->getFullDetails($lifter, $compound);
         }
 
-        $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $compound, $strengthComparisonDetails, $input);
+        $oneRepMaxDetails = $this->oneRepMaxService->getFullDetails($lifter, $compound, $strengthComparisonDetails);
 
         return view('onerepmax.finalStep', [
             'lifter' => $lifter,

@@ -12,19 +12,21 @@ class OneRepMaxService
     public function __construct(StrengthComparisonService $strengthComparisonService) {
         $this->strengthComparisonService = $strengthComparisonService;
     }
-    public function getFullDetails($lifter, $compound, $strengthComparisonDetails, $input)
+    public function getFullDetails($lifter, $compound, $strengthComparisonDetails)
     {
         $example = [];
+
+        $lifterRecord = $lifter->getLifterRecordForCompound($compound->id);
         
         if (!empty($strengthComparisonDetails)) {
             $example = $this->getExample($lifter->gender, $strengthComparisonDetails['standards']['minRatio'], $strengthComparisonDetails['standards']['maxRatio']);
         }
 
-        $oneRepMax = $this->getOneRepMax($input['compoundWeight'], $input['reps'] + $input['repsInReserve']);
+        $oneRepMax = $this->getOneRepMax($lifterRecord->compound_total, $lifterRecord->reps + $lifterRecord->reps_in_reserve);
         $weightRatio = $this->getRatio($lifter, $oneRepMax);
 
-        $results = $this->getWeightChart($input['compoundWeight'], $input['reps'], $input['repsInReserve']);
-        $percentOfRelativeIntensity = $this->getPercentOfRelativeIntensity($input['reps'], $input['repsInReserve']);
+        $results = $this->getWeightChart($lifterRecord->compound_total, $lifterRecord->reps, $lifterRecord->reps_in_reserve);
+        $percentOfRelativeIntensity = $this->getPercentOfRelativeIntensity($lifterRecord->reps, $lifterRecord->reps_in_reserve);
 
         $trainingLevel = $this->strengthComparisonService->getTrainingLevel($lifter, $compound);
         
