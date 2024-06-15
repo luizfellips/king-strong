@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('compound_id');
             $table->string('training_level')->nullable();
             $table->string('years_of_lifting')->nullable();
-            $table->float('min_ratio');
-            $table->float('max_ratio');
-            $table->char('gender');
+            $table->float('min_ratio')->nullable();
+            $table->float('max_ratio')->nullable();
+            $table->char('gender')->nullable();
 
             $table->foreign('compound_id')->references('id')->on('compounds')->onDelete('cascade');
         });

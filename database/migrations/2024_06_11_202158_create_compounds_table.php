@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('compounds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->string('short_description');
-            $table->string('image_path');
-            $table->string('slug')->unique();
+            $table->string('description')->nullable();
+            $table->string('short_description')->nullable();
+            $table->string('image_path')->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->timestamps();
         });
 
