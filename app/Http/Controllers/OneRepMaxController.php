@@ -32,8 +32,6 @@ class OneRepMaxController extends Controller
         return view('onerepmax.step1');
     }
 
-    
-
     public function processStep1(Request $request)
     {
         $input = $this->validateLifterName($request);
@@ -58,6 +56,9 @@ class OneRepMaxController extends Controller
         }
 
         if ($lifter->slug !== session()->get('lifter')) {
+            $lifter = Lifter::where('slug', '=', session()->get('lifter'));
+            $lifter->delete();
+
             return redirect()->route('onerepmax.step1')->withErrors(['Erro de Autorização.']);
         }
     }
@@ -153,7 +154,7 @@ class OneRepMaxController extends Controller
                 'compoundSlug' => $compound->slug,
             ]);
         } catch (\Throwable $th) {
-            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while updating the lifter.']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while registering the lifter record.']);
         }
     }
 
