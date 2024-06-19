@@ -29,6 +29,7 @@
             -webkit-user-select: none;
             touch-action: manipulation;
             vertical-align: middle;
+            transition: 0.2s;
         }
 
         .button-24:hover,

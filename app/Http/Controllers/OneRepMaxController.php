@@ -57,7 +57,7 @@ class OneRepMaxController extends Controller
     {
         $input = $request->validated();
 
-        $lifterSlug = $input['lifter_slug']; // Retrieve slug from input
+        $lifterSlug = $input['lifter_slug'];
         $height = $input['height'];
         $weight = $input['weight'];
         $years_of_lifting = $input['years_of_lifting'];
@@ -84,6 +84,7 @@ class OneRepMaxController extends Controller
         $lifter = Lifter::where('slug', $lifterSlug)->firstOrFail();
 
         $compounds = Compound::with('muscles')->get();
+
         return view('onerepmax.step3', ['lifter' => $lifter, 'compounds' => $compounds]);
     }
 
