@@ -18,15 +18,15 @@
             <p class="text-sm mt-3 text-gray-600"></p>
             <div id="muscles">
                 <span
-                    class="bg-red-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900"></span>
+                    class="bg-red-900 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900"></span>
             </div>
             <button id="closeModalButton"
                 class=" bg-zinc-900 hover:bg-slate-800 transition-colors text-white font-semibold rounded-md py-2 mt-5 px-4 w-full">Voltar</button>
             <form class="preventive" action="{{ route('onerepmax.processStep3') }}" method="POST">
                 @csrf
                 <input id="compound_slug" name="compound_slug" type="hidden" value="">
-                <input type="hidden" name="lifter_slug" value="{{ $lifter->slug }}"> 
-                <x-button :isDark='true'>Escolher</x-button>
+                <input type="hidden" name="lifter_slug" value="{{ $lifter->slug }}">
+                <x-onerepmax.button :isDark='true'>Escolher</x-onerepmax.button>
             </form>
         </div>
     </div>

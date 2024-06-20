@@ -1,4 +1,4 @@
-<x-layout>
+<x-onerepmax.layout>
     <h1 class="text-2xl text-white text-center font-medium flex justify-center mb-12">Tabela de Porcentagem e Cargas</h1>
     <p class="text-sm sm:text-base text-white font-semibold text-center mb-8">Você efetuou o exercício à <span
             class="text-red-600 text-lg px-1">
@@ -31,7 +31,7 @@
                     </tbody>
                 </table>
             </div>
-        
+
             <!-- Responsive Card Layout for smaller screens -->
             <div class="sm:hidden w-full">
                 <div class="background text-sm text-white p-4 rounded-lg">
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        
+
         @unless ($compound->id === 4)
             <div class="sm:w-full flex flex-col items-center p-3 justify-center background text-white shadow-md rounded-xl mt-3">
                 <h1 class="text-xl">Quão forte você deveria ser?</h1>
@@ -65,23 +65,23 @@
                 @switch($standards['yearsOfLifting'])
                     @case('two_to_five_years')
                         <h2 class="text-base p-1 text-center">Média de 1RM Entre <span class="font-bold">2 e 5 anos de
-                                treino</span>:</h2>
+                                treino</span></h2>
                     @break
                     @case('up_to_two_years')
                         <h2 class="text-base p-1 text-center">Média de 1RM Entre <span class="font-bold">6 meses e 2 anos
-                                de treino:</span>:</h2>
+                                de treino:</span></h2>
                     @break
 
                     @case('three_to_six_months')
-                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">3 e 6 meses de treino</span>:</h2>
+                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">3 e 6 meses de treino</span></h2>
                     @break
 
                     @case('five_or_more_years')
-                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">5 ou mais anos de treino:</span>:</h2>
+                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">5 ou mais anos de treino:</span></h2>
                     @break
 
                     @case('ten_or_more_years')
-                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">10 ou mais anos de treino:</span>:</h2>
+                        <h2 class="text-base text-white p-1 text-center">Média de 1RM Entre <span class="font-bold">10 ou mais anos de treino:</span></h2>
                     @break
                     @default
                 @endswitch
@@ -103,7 +103,7 @@
                         <p>para ser considerada <span
                                 class="text-red-600 font-bold">{{ ucfirst($standards['trainingLevel']) }}.</span></p>
                         @endif
-                            
+
                         @endforeach
                     </div>
                 </div>
@@ -113,4 +113,4 @@
     </div>
     <a href="{{ route('onerepmax.step1') }}"><button
             class="bg-black hover:bg-slate-800 transition-colors text-white font-semibold rounded-md py-2 flex justify-around shadow-lg mt-5 px-4 w-full">Voltar</button></a>
-</x-layout>
+</x-onerepmax.layout>

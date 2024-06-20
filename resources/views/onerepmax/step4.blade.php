@@ -1,4 +1,4 @@
-<x-layout>
+<x-onerepmax.layout>
     <h1 class="text-1xl sm:text-2xl text-white font-medium flex justify-center mb-12">Insira seu recorde pessoal no {{ $compound->name }}.</h1>
     <form class="preventive" action="{{ route('onerepmax.processStep4') }}" method="POST">
         @csrf
@@ -11,8 +11,8 @@
             </ul>
         </div>
     @endif
-    <input id="compound_slug" type="hidden" name="compound_slug" value="{{ $compound->slug }}"> 
-    <input id="lifter_slug" type="hidden" name="lifter_slug" value="{{ $lifter->slug }}"> 
+    <input id="compound_slug" type="hidden" name="compound_slug" value="{{ $compound->slug }}">
+    <input id="lifter_slug" type="hidden" name="lifter_slug" value="{{ $lifter->slug }}">
         <div class="mb-5">
             <div class="mb-4">
                 <label class="block text-white pb-1">Quantos quilogramas(kg) foram levantados ao todo?</label>
@@ -37,6 +37,6 @@
 
         </div>
 
-        <x-button :isDark="true">Calcular</x-button>
+        <x-onerepmax.button :isDark="true">Calcular</x-onerepmax.button>
     </form>
-</x-layout>
+</x-onerepmax.layout>

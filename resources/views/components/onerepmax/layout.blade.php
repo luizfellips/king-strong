@@ -125,13 +125,13 @@
     <div
         class="background flex justify-center items-center overflow-hidden {{ Request::route() && Request::route()->getName() !== 'onerepmax.finalStep' ? 'h-screen overflow-y-auto' : '' }}">
         <div class="lg:p-36 md:p-52 p-8 fade-in">
-            <x-logo />
+            <x-onerepmax.logo />
             <div class="isLoading h-screen fixed inset-0 hidden">
                 <div class="flex justify-center bg-black items-center h-screen bg-opacity-50">
                     <div class="loader"></div>
                 </div>
             </div>
-            
+
             {{ $slot }}
         </div>
     </div>
@@ -178,7 +178,7 @@
         // Iterate over muscles array and create span elements
         data.muscles.forEach(function(muscle, index) {
             var span = $('<span>', {
-                'class': 'bg-red-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900',
+                'class': 'bg-red-900 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900',
                 'text': muscle
             });
 

@@ -1,4 +1,4 @@
-<x-layout>
+<x-onerepmax.layout>
 
 
     <h1 class="text-2xl font-medium text-white flex justify-center mb-12">Olá {{ $lifter->name }}!</h1>
@@ -53,7 +53,7 @@
                 </select>
             </div>
         </div>
-        <x-button :isDark="true"> Próximo </x-button>
+        <x-onerepmax.button :isDark="true"> Próximo </x-onerepmax.button>
     </form>
     <script>
          $(document).ready(function(){
@@ -65,4 +65,4 @@
             });
         });
     </script>
-</x-layout>
+</x-onerepmax.layout>

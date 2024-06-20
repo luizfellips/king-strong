@@ -1,4 +1,4 @@
-<x-layout>
+<x-onerepmax.layout>
     <a href="{{ route('home') }}">
     </a>
     <h1 class="text-2xl  text-white font-medium flex justify-center mb-12">Calcule suas porcentagens de 1RM!</h1>
@@ -19,7 +19,7 @@
                 class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
                 autocomplete="off">
         </div>
-        <x-button :isDark="true"> Próximo </x-button>
-        <x-link-button :route="route('home')"> Voltar </x-link-button>
+        <x-onerepmax.button :isDark="true"> Próximo </x-onerepmax.button>
+        <x-onerepmax.link-button :route="route('home')"> Voltar </x-onerepmax.link-button>
     </form>
-</x-layout>
+</x-onerepmax.layout>
