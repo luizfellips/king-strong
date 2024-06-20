@@ -12,6 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+            WorkoutSeeder::class,
+            GoalsSeeder::class,
+            LevelsSeeder::class,
+            WorkoutGoalsSeeder::class,
+            WorkoutLevelsSeeder::class,
+            WeekSeeder::class,
+            DaySeeder::class,
+            DayExerciseSeeder::class,
+        ]);
     }
 }
