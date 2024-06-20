@@ -85,8 +85,7 @@
                 <div class="flex flex-wrap flex-col sm:flex-row justify-around gap-5">
                     <a href="{{ route('onerepmax.step1') }}" class="button-24 px-6 py-2 rounded-lg mb-4">One
                         Rep Max</a>
-                    <a href="#" class="button-24 px-6 py-2 rounded-lg mb-4">Análise
-                        de Treino</a>
+                    <a href="{{ route('workouts.index') }}" class="button-24 px-6 py-2 rounded-lg mb-4">Programas de Treinamento</a>
                     <a href="#" class="button-24 px-6 py-2 rounded-lg mb-4">Lorem ipsum</a>
                 </div>
             </div>

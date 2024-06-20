@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\OneRepMaxController;
 use App\Http\Middleware\OneRepMax\CheckCurrentLifterMiddleware;
 
@@ -22,4 +23,10 @@ Route::prefix('onerepmax')->name('onerepmax.')->group(function () {
     Route::post('process-step-2', [OneRepMaxController::class, 'processStep2'])->name('processStep2');
     Route::post('process-step-3', [OneRepMaxController::class, 'processStep3'])->name('processStep3');
     Route::post('process-step-4', [OneRepMaxController::class, 'processStep4'])->name('processStep4');
+});
+
+
+/** Programs */
+Route::prefix('workouts')->name('workouts.')->group(function () {
+    Route::get('/', [WorkoutController::class, 'index'])->name('index');
 });
