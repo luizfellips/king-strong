@@ -22,7 +22,7 @@
         </div>
         <div class="workout-duration-tags mt-2 flex flex-col justify-center align-middle items-start gap-2">
             <div class="duration-tag text-xs px-3">
-                    <div class="tag bg-purple-200 text-purple-700 p-1 rounded-2xl">{{$workout->minutes_per_workout}} minutes per workout</div>
+                    <div class="tag bg-purple-200 text-purple-700 p-2 rounded-2xl">{{$workout->minutes_per_workout}} minutes per workout</div>
             </div>
             <div class="days-per-week-tags text-xs px-3">
                     <div class="tag bg-purple-200 text-purple-700 p-2 rounded-2xl">{{$workout->workouts_per_week}} days/week</div>

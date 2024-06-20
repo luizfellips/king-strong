@@ -6,10 +6,7 @@
 
     <x-workouts.filter.filter-options :levels="$levels" :goals="$goals" />
 
-    <div class="workouts py-2 flex flex-col justify-center items-center">
-        @foreach ($workouts as $workout)
-            <x-workouts.workout.workout :workout="$workout" />
-        @endforeach
+    <div id="workoutResults" class="workouts py-2 flex flex-col justify-center items-center">
     </div>
 
 </x-workouts.layout>
