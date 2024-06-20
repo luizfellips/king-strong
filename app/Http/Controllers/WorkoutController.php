@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Workouts\Goal;
+use App\Models\Workouts\Level;
 use App\Models\Workouts\Exercises\Exercise;
 use App\Models\Workouts\Workout as Workout;
 
@@ -13,11 +15,11 @@ class WorkoutController extends Controller
      */
     public function index()
     {
-        $workouts = Workout::with(['levels','goals','weeks.days.dayExercises.exercise.targetMuscles'])->paginate(6);
+        $levels = Level::all();
+        $goals = Goal::all();
+        $workouts = Workout::with(['levels', 'goals'])->paginate(4);
 
-        $exercises = Exercise::with('targetMuscles')->get();
-
-        return view('workout.index', compact('workouts', 'exercises'));
+        return view('workout.index', compact('levels', 'goals', 'workouts'));
     }
 
     /**

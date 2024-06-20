@@ -65,7 +65,7 @@
     <header class="w-full py-4">
         <div class="container mx-auto px-4 flex flex-col sm:flex-row pb-3 justify-around items-center">
             <div class="text-2xl font-bold text-gray-800">
-                <x-logo />
+                <x-onerepmax.logo />
             </div>
             <nav class="flex flex-wrap ps-6 sm:pe-12 flex-row sm:flex-row md:justify-around gap-12">
                 <a href="#" class="text-white  transition-all hover:text-red-600">Início</a>
