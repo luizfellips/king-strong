@@ -14,9 +14,14 @@ class WorkoutController extends Controller
     {
         // Get filter parameters from the request
         $levelIds = $request->input('levels');
+        $search = $request->input('search');
         $goalIds = $request->input('goals');   
         $workoutsPerWeek = $request->input('workouts_per_week'); 
         $query = Workout::with(['levels', 'goals']);
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
 
         if ($levelIds) {
             $query->whereHas('levels', function ($query) use ($levelIds) {
