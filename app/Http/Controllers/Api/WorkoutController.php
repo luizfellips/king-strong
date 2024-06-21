@@ -13,12 +13,11 @@ class WorkoutController extends Controller
     public function index(Request $request)
     {
         // Get filter parameters from the request
-        $levelIds = $request->input('levels'); // Assume levels is an array of level IDs
-        $goalIds = $request->input('goals');   // Assume goals is an array of goal IDs
-        $workoutsPerWeek = $request->input('workouts_per_week'); // Maximum duration
+        $levelIds = $request->input('levels');
+        $goalIds = $request->input('goals');   
+        $workoutsPerWeek = $request->input('workouts_per_week'); 
         $query = Workout::with(['levels', 'goals']);
 
-        // Apply filters
         if ($levelIds) {
             $query->whereHas('levels', function ($query) use ($levelIds) {
                 $query->whereIn('levels.id', $levelIds);

@@ -2,3 +2,7 @@
     background: rgb(50, 5, 5);
     background: linear-gradient(0deg, rgba(50, 5, 5, 1) 0%, rgba(0, 0, 0, 1) 69%);
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

@@ -17,8 +17,8 @@ class WorkoutGoalsSeeder extends Seeder
             ['workout_id' => 1, 'goal_id' => 1, 'created_at' => now(), 'updated_at' => now()],
             ['workout_id' => 1, 'goal_id' => 3, 'created_at' => now(), 'updated_at' => now()],
             ['workout_id' => 2, 'goal_id' => 2, 'created_at' => now(), 'updated_at' => now()],
-            ['workout_id' => 3, 'goal_id' => 4, 'created_at' => now(), 'updated_at' => now()],
-            ['workout_id' => 4, 'goal_id' => 2, 'created_at' => now(), 'updated_at' => now()],
+            ['workout_id' => 3, 'goal_id' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['workout_id' => 4, 'goal_id' => 4, 'created_at' => now(), 'updated_at' => now()],
             ['workout_id' => 5, 'goal_id' => 1, 'created_at' => now(), 'updated_at' => now()],
             ['workout_id' => 5, 'goal_id' => 3, 'created_at' => now(), 'updated_at' => now()],
         ]);
