@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/workouts/page.css') }}">
     <title>Programas de Treinamento</title>
@@ -13,7 +13,7 @@
 
 <body class="background text-white min-h-screen">
     <x-workouts.navbar />
-    <div class="content w-full mt-24 md:mt-48 px-8 sm:px-32">
+    <div class="content w-full mt-24 sm:mt-48 px-8 sm:px-32">
         {{ $slot }}
     </div>
     <script src="{{ asset('js/flowbite.min.js') }}"></script>

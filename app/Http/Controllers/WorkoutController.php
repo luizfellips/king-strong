@@ -43,7 +43,11 @@ class WorkoutController extends Controller
      */
     public function show(Workout $workout)
     {
-        //
+        $workout = Workout::where('id', $workout->id)->with(['levels', 'goals', 'weeks.days.dayExercises.exercise'])->firstOrFail();
+        $levels = $workout->levels->pluck('name')->implode(', ');
+        $goals = $workout->goals->pluck('name')->implode(', ');
+
+        return view('workout.show', ['workout' => $workout, 'levels' => $levels, 'goals' => $goals]);
     }
 
     /**

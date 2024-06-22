@@ -29,4 +29,5 @@ Route::prefix('onerepmax')->name('onerepmax.')->group(function () {
 /** Programs */
 Route::prefix('workouts')->name('workouts.')->group(function () {
     Route::get('/', [WorkoutController::class, 'index'])->name('index');
+    Route::get('/{workout}', [WorkoutController::class, 'show'])->name('show');
 });
