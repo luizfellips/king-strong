@@ -1,5 +1,5 @@
 <nav class="bg-black text-white fixed w-full z-50 top-0 start-0">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <div class="hidden sm:block">
                 <x-onerepmax.logo />

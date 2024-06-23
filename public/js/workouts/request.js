@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: '/api/workoutsapi',
-            type: 'GET', 
+            type: 'GET',
             data: formData,
             success: function (response) {
                 renderWorkouts(response.data);
@@ -102,7 +102,7 @@ function renderWorkouts(workouts) {
 
 function generateWorkoutHtml(workout) {
     return `
-<div class="workout my-3">
+<a class="workout my-3" href="${route('workouts.show', workout.id)}">
     <div class="workout-image rounded-t-xl">
         <img class="rounded-t-xl" src="https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg" alt="" srcset="">
     </div>
@@ -118,20 +118,24 @@ function generateWorkoutHtml(workout) {
             ${generateDurationTag(workout.lengthInWeeks, 'weeks')}
         </div>
     </div>
-</div>`;
+</a>`;
 }
 
 function generateGoalsTags(goals) {
     return `
     <div class="goal-tags text-xs flex gap-2 px-3">
-        ${goals.map(goal => generateTag(goal, 'red')).join('')}
+        ${goals.map(goal => {
+            return `<div class="tag bg-red-200 text-red-700 p-2 rounded-3xl">${goal}</div>`;
+        }).join('')}
     </div>`;
 }
 
 function generateLevelsTags(levels) {
     return `
     <div class="level-tags text-xs flex gap-2 px-3">
-        ${levels.map(level => generateTag(level, 'blue')).join('')}
+        ${levels.map(level => {
+            return `<div class="tag bg-blue-200 text-blue-700 p-2 rounded-3xl">${level}</div>`;
+        }).join('')}
     </div>`;
 }
 
@@ -140,8 +144,4 @@ function generateDurationTag(value, label) {
     <div class="duration-tag text-xs px-3">
         <div class="tag bg-purple-200 text-purple-700 p-2 rounded-2xl">${value} ${label}</div>
     </div>`;
-}
-
-function generateTag(text, color) {
-    return `<div class="tag bg-${color}-200 text-${color}-700 p-2 rounded-3xl">${text}</div>`;
 }
