@@ -4,5 +4,17 @@
 }
 
 ::-webkit-scrollbar {
-    display: none;
-}
+    height: 0px;
+    width: 6px;
+    border: 1px solid #fff;
+  }
+  
+  ::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: #5c0000;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: #e7e7e7;
+  }

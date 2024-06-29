@@ -1,5 +1,5 @@
 <x-workouts.layout>
-    <div class="block overflow-x-hidden md:grid md:grid-cols-2 md:gap-3">
+    <div class="block overflow-x-hidden mb-3 md:grid md:grid-cols-2 md:gap-3">
 
         <div class="workout">
             <a href="{{ route('workouts.index') }}">
@@ -16,7 +16,7 @@
                 <div class="workout-description p-3 bg-white text-black rounded-md mb-2">
                     <h2 class="text-lg py-2 font-bold text-black">Program Description</h2>
                     <p class="description text-gray-500">
-                        {{ $workout->description }}
+                        {!! html_entity_decode($workout->description)!!}
                     </p>
                 </div>
                 <x-workouts.workout.overview :levels="$levels" :goals="$goals" :workout="$workout" />
@@ -117,30 +117,10 @@
             <div class="workout-guide mt-2 bg-white text-gray-500 p-5 rounded-lg">
                 <h1 class="text-black font-bold text-xl">Program Guide</h1>
                 <p class="workout-content">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo magni beatae veniam reprehenderit
-                    iste cum consequuntur odio impedit enim? Molestiae incidunt optio nesciunt necessitatibus natus
-                    tempora, voluptatum et perferendis praesentium.
+                    @php
+                        $guide = $workout->guide ? $workout->guide : 'There is no guide available for this workout.';
+                    @endphp
+                    {!! html_entity_decode($guide)!!}
                 </p>
             </div>
 

@@ -16,21 +16,9 @@ class WorkoutSeeder extends Seeder
         DB::table('workouts')->insert([
             [
                 'name' => 'Beginner Strength',
-                'description' => 'This 4-Day Upper Lower Program is designed by Alberto Nuñez, who is the head bodybuilding coach at 3D Muscle Journey. Alberto is an accomplished lifelong natural bodybuilder, having most recently won Mr. Universe at the 2022 WNBF.
-
-                    Alberto Nuñez designed this program to target your upper and lower body muscles twice a week. Additionally, there are 4 program variations for you to choose from, with each focused more on a specific muscle group while still targeting the entire body.
-
-                    Program Variations
-
-                    Arms dominant (biceps, triceps, shoulders)
-
-                    Torso dominant (chest, back, lats)
-
-                    Quad dominant (quadriceps, thigh)
-
-                    Glute-ham dominant (butt, hamstrings)
-
-                    Read the full guide below for an overview of the program and progression guidance.',
+                'description' => 'A nice beginner program for strength gains.',
+                'guide' => null,
+                'img_path' => null,
                 'length_in_weeks' => 8,
                 'workouts_per_week' => 3,
                 'minutes_per_workout' => 45,
@@ -43,6 +31,8 @@ class WorkoutSeeder extends Seeder
                 'length_in_weeks' => 12,
                 'workouts_per_week' => 4,
                 'minutes_per_workout' => 60,
+                'guide' => null,
+                'img_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -52,6 +42,8 @@ class WorkoutSeeder extends Seeder
                 'length_in_weeks' => 6,
                 'workouts_per_week' => 5,
                 'minutes_per_workout' => 30,
+                'guide' => null,
+                'img_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -61,6 +53,8 @@ class WorkoutSeeder extends Seeder
                 'length_in_weeks' => 10,
                 'workouts_per_week' => 2,
                 'minutes_per_workout' => 60,
+                'guide' => null,
+                'img_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -70,6 +64,8 @@ class WorkoutSeeder extends Seeder
                 'length_in_weeks' => 8,
                 'workouts_per_week' => 3,
                 'minutes_per_workout' => 50,
+                'guide' => null,
+                'img_path' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
