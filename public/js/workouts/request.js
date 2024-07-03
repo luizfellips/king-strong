@@ -32,12 +32,19 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+     // Initialize the filters object
+     var filters = {
+        levels: [],
+        goals: [],
+        workouts_per_week: [],
+    };
+
     // Toggle filter and perform AJAX request
     $('.filter-option').click(function () {
         var filterType = $(this).data('filter-type');
         var filterId = $(this).data('id');
 
-        filters = getFilterOptions($(this), filterType, filterId);
+        processFilterOptions($(this), filterType, filterId, filters);
 
         $.ajax({
             url: '/api/workoutsapi',
@@ -53,13 +60,7 @@ $(document).ready(function () {
     });
 });
 
-function getFilterOptions(filterObject, filterType, filterId) {
-    var filters = {
-        levels: [],
-        goals: [],
-        workouts_per_week: [],
-    };
-
+function processFilterOptions(filterObject, filterType, filterId, filters) {
     // Toggle the active state for the clicked filter option
     if (filterObject.hasClass('active')) {
         filterObject.removeClass('active text-white');
@@ -85,8 +86,6 @@ function getFilterOptions(filterObject, filterType, filterId) {
         }
 
         filters[filterType].push(filterId);
-
-        return filters;
     }
 }
 
