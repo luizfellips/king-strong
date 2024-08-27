@@ -21,6 +21,7 @@ class WorkoutResource extends JsonResource
             'lengthInWeeks' => $this->length_in_weeks,
             'workoutsPerWeek' => $this->workouts_per_week,
             'minutesPerWorkout' => $this->minutes_per_workout,
+            'imagePath' => $this->img_path,
             'levels' => $this->levels->pluck('name'),
             'goals' => $this->goals->pluck('name'),
         ];

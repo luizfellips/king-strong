@@ -17,6 +17,7 @@ class Workout extends Model
         'length_in_weeks',
         'workouts_per_week',
         'minutes_per_workout',
+        'img_path'
     ];
 
     public function levels()

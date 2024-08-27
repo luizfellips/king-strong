@@ -12,11 +12,12 @@ class WorkoutController extends Controller
 {
     public function index(Request $request)
     {
-        // Get filter parameters from the request
         $levelIds = $request->input('levels');
         $search = $request->input('search');
         $goalIds = $request->input('goals');   
         $workoutsPerWeek = $request->input('workouts_per_week'); 
+        $lengthInWeeks = $request->input('length_in_weeks');
+
         $query = Workout::with(['levels', 'goals']);
 
         if ($search) {
@@ -42,6 +43,13 @@ class WorkoutController extends Controller
             $query->whereIn('workouts_per_week', $workoutsPerWeek);
         }
 
+        if ($lengthInWeeks) {
+            if (!is_array($lengthInWeeks)) {
+                $lengthInWeeks = [$lengthInWeeks];
+            }
+            $query->whereIn('length_in_weeks', $lengthInWeeks);
+        }
+
         $workouts = $query->get();
 
 
@@ -53,7 +61,7 @@ class WorkoutController extends Controller
      */
     public function show(Workout $workout)
     {
-        $workout->load(['levels', 'goals']); // Eager load the muscles relationship
+        $workout->load(['levels', 'goals']);
         return new WorkoutResource($workout);
     }
 }

@@ -9,7 +9,7 @@
             <h1 class="workout-title mb-5 text-white text-4xl">{{ $workout->name }}</h1>
             <div class="workout-image rounded-xl">
                 <img class="rounded-xl w-50"
-                    src="https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg"
+                    src="{{$workout->img_path ? asset($workout->img_path) : asset('img/workouts/fallback.jpg')}}"
                     alt="" srcset="">
             </div>
             <div class="workout-content py-4">

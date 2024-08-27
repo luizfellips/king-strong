@@ -32,11 +32,12 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-     // Initialize the filters object
-     var filters = {
+    // Initialize the filters object
+    var filters = {
         levels: [],
         goals: [],
         workouts_per_week: [],
+        length_in_weeks: []
     };
 
     // Toggle filter and perform AJAX request
@@ -45,6 +46,7 @@ $(document).ready(function () {
         var filterId = $(this).data('id');
 
         processFilterOptions($(this), filterType, filterId, filters);
+
 
         $.ajax({
             url: '/api/workoutsapi',
@@ -67,6 +69,9 @@ function processFilterOptions(filterObject, filterType, filterId, filters) {
         if (filterObject.hasClass('bg-yellow-500')) {
             filterObject.removeClass('text-white').addClass('text-yellow-500');
         }
+        if (filterObject.hasClass('bg-green-500')) {
+            filterObject.removeClass('text-white').addClass('text-green-500');
+        }
         filterObject.removeClass(function (index, className) {
             return (className.match(/(^|\s)bg-\S+/g) || []).join(' ');
         });
@@ -83,6 +88,9 @@ function processFilterOptions(filterObject, filterType, filterId, filters) {
         } else if (filterObject.hasClass('day-button')) {
             filterObject.removeClass('text-yellow-500');
             filterObject.addClass('bg-yellow-500 text-white');
+        } else if (filterObject.hasClass('week-button')) {
+            filterObject.removeClass('text-green-500');
+            filterObject.addClass('bg-green-500 text-white');
         }
 
         filters[filterType].push(filterId);
@@ -101,11 +109,11 @@ function renderWorkouts(workouts) {
 
 function generateWorkoutHtml(workout) {
     return `
-<a class="workout my-3" href="${route('workouts.show', workout.id)}">
-    <div class="workout-image rounded-t-xl">
-        <img class="rounded-t-xl" src="https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg" alt="" srcset="">
+<a class="workout flex flex-col items-stretch my-3" href="${route('workouts.show', workout.id)}">
+    <div class="workout-image h-48 rounded-t-xl overflow-hidden"> <!-- Fixed height class -->
+        <img class="rounded-t-xl w-full h-full object-cover" src="${workout.imagePath ? workout.imagePath : 'img/workouts/fallback.jpg'}" alt="" srcset="">
     </div>
-    <div class="workout-content bg-white py-5 rounded-b-xl text-black">
+    <div class="workout-content flex-1 bg-white py-5 rounded-b-xl text-black">
         <div class="workout-title p-2 rounded-b-xl">${workout.name}</div>
         <div class="workout-level-goals-tags flex flex-row md:flex-col xl:flex-row gap-2 justify-between">
             ${generateGoalsTags(workout.goals)}
@@ -117,15 +125,15 @@ function generateWorkoutHtml(workout) {
             ${generateDurationTag(workout.lengthInWeeks, 'weeks')}
         </div>
     </div>
-</a>`;
+</a>`
 }
 
 function generateGoalsTags(goals) {
     return `
     <div class="goal-tags text-xs flex gap-2 px-3">
         ${goals.map(goal => {
-            return `<div class="tag bg-red-200 text-red-700 p-2 rounded-3xl">${goal}</div>`;
-        }).join('')}
+        return `<div class="tag bg-red-200 text-red-700 p-2 rounded-3xl">${goal}</div>`;
+    }).join('')}
     </div>`;
 }
 
@@ -133,8 +141,8 @@ function generateLevelsTags(levels) {
     return `
     <div class="level-tags text-xs flex gap-2 px-3">
         ${levels.map(level => {
-            return `<div class="tag bg-blue-200 text-blue-700 p-2 rounded-3xl">${level}</div>`;
-        }).join('')}
+        return `<div class="tag bg-blue-200 text-blue-700 p-2 rounded-3xl">${level}</div>`;
+    }).join('')}
     </div>`;
 }
 

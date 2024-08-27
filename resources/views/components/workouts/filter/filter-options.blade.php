@@ -31,4 +31,14 @@
             @endforeach
         </div>
     </div>
+    <div class="weekLength">
+        <p class="text-gray-200 mb-2 text-sm">Program Length</p>
+        <div class="flex max-w-full snap-x snap-mandatory space-x-3 overflow-x-scroll p-2 px-1">
+            @foreach (range(4, 12) as $weeks)
+                <button class="shrink-0 snap-start scroll-ml-4 border border-opacity-50 border-green-400 rounded-3xl p-2 text-xs week-button text-green-500 filter-option"
+                    data-filter-type="length_in_weeks" data-id="{{ $weeks }}">
+                    {{ $weeks }} weeks</button>
+            @endforeach
+        </div>
+    </div>
 </div>
